@@ -1,0 +1,13 @@
+{
+    "version": 2,
+    "rewrites": [
+        {
+            "source": "/topic/:id",
+            "destination": "/topic.html"
+        },
+        {
+            "source": "/(.*)",
+            "destination": "/api"
+        }
+    ]
+}

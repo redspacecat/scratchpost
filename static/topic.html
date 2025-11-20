@@ -1,15 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ScratchPost - Scratch Forums Viewer</title>
+    <style>
+        #posts_container {
+            width: fit-content;
+            margin: 0 auto;
+        }
+
+        .post {
+            margin: 10px;
+            border: 2px solid lightgray;
+            border-radius: 10px;
+            width: 940px;
+        }
+
+        .post .container {
+            display: flex;
+        }
+
+        .post .content {
+            margin: 15px;
+        }
+
+        .post .left {
+            border-radius: 0 0 0 7px;
+        }
+
+        .post .right {
+            width: 100%;
+        }
+
+        .post .date {
+            background-color: #107da8;
+            color: white;
+            padding: 7px;
+            border-radius: 7px 7px 0 0;
+        }
+
+        .post .left {
+            padding: 10px;
+        }
+
+        .post .left img {
+            margin-top: 5px;
+            width: 90px;
+            height: 90px;
+        }
+
+        body {
+            font-family: "helvetica neue", arial, sans-serif;
+        }
+    </style>
+    <link rel="stylesheet" href="/static/css/posts.css">
 </head>
+
 <body>
     <h2>Viewing Topic</h2>
-    <div id="post_container">
-
-    </div>
-    <script src="/js/main.js"></script>
+    <div id="posts_container" class="djangobb"></div>
+    <script src="/static/js/main.js"></script>
 </body>
+
 </html>

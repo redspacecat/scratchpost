@@ -1,0 +1,909 @@
+/*
+ * Text
+ */
+
+.djangobb {
+    font-size: 13px;
+    line-height: normal;
+}
+
+/* IEWin Font Size only - to allow IEWin to zoom. Do not remove comments \*/
+* html .djangobb {
+    font-size: 81.25%;
+}
+/* End IE Win Font Size */
+
+/* Set font size for tables because IE requires it */
+.djangobb table,
+.djangobb input,
+.djangobb select,
+.djangobb optgroup,
+.djangobb textarea,
+.postmsg .postedit {
+    font-size: 1em;
+}
+
+.djangobb pre {
+    font-size: .9em;
+    font-family: Menlo, Monaco, Consolas, "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
+}
+.djangobb pre.blocks {
+    font: bold 10px/1 "Lucida Grande", Verdana, Arial, "DejaVu Sans", sans-serif;
+    margin: 0 0 3px;
+    position: relative;
+}
+
+.djangobb h3 {
+    font-size: 1em;
+    line-height: normal;
+}
+.postmsg p {
+    line-height: 1.4;
+}
+.postmsg h4,
+.tcl h3,
+.forminfo h3,
+.postlink,
+.linkst li,
+.linksb li,
+.postlinksb li,
+.blockmenu li,
+.djangobb .warntext {
+    font-weight: bold;
+}
+
+/*
+ * Borders
+ */
+
+.djangobb td,
+.djangobb th,
+.djangobb blockquote,
+.code,
+.forminfo,
+.blockpost label {
+    border-style: solid;
+    border-width: 1px;
+}
+
+/*
+ * Breadcrumbs
+ */
+
+.linkst,
+.linksb {
+    padding: 6px;
+    position: relative;
+}
+.linkst {
+    margin-top: 40px;
+}
+.linksb {
+    margin-top: -20px;
+    margin-bottom: 20px;
+}
+
+/*
+ * Spacing
+ */
+
+.djangobb .blockpost dl {
+    padding: 6px 20px;
+}
+
+.djangobb h1 {
+    padding: 3px 0px 0px 0px;
+}
+#brdtitle p {
+    padding: 0;
+}
+#brdwelcome,
+#brdfooter dl {
+    line-height: 1.4;
+}
+#brdmenu li,
+.blockform p input {
+    margin-right: 6px;
+}
+#brdmenu .conr li {
+    margin-right: 0;
+}
+
+/*
+ * Tables
+ */
+
+.djangobb th, .djangobb td {
+    border-bottom: 0;
+    border-right: 0;
+    padding: 4px 6px;
+}
+.djangobb th {
+    border-top: 0;
+}
+.djangobb td {
+    padding: 8px 6px;
+}
+.djangobb td p {
+    padding: 5px 0 0 0;
+}
+.djangobb .tcl {
+    border-left: 0;
+}
+.tc3 {
+    width: 70px;
+}
+
+/*
+ * Posts
+ */
+
+.postright {
+    padding: 12px 20px;
+    text-shadow: none;
+}
+
+dd.usercontacts, dd.postavatar {
+    margin-top: 5px;
+}
+dd.postavatar {
+    margin-bottom: 5px;
+}
+.djangobb .username {
+    font-weight: bold;
+}
+
+.postmsg .postedit {
+    padding-top: 15px;
+}
+.postmsg p {
+    padding: 0
+}
+
+.postmsg h4 {
+    margin-bottom: 10px;
+}
+.djangobb blockquote,
+.code {
+    margin: 12px 0 !important;
+    padding: 12px 20px !important;
+}
+
+.postfootleft p,
+.postfootright ul,
+.postfootright div {
+    padding: 10px 6px 5px 20px;
+}
+
+.blockpost input,
+.blockpost label {
+    padding: 3px;
+    display: inline;
+}
+
+.multidelete {
+    padding-top: 15px;
+    padding-bottom: 5px;
+}
+.multidelete label {
+    font-weight: bold;
+}
+
+/*
+ * Icons
+ */
+
+.forumicon,
+.inew,
+.isticky,
+.iclosed {
+    float: left;
+    display: block;
+    height: 16px;
+    width: 16px;
+}
+.djangobb .tcl img.rss {
+    margin-top: .8em;
+}
+
+.searchposts .forumicon {
+    margin-left: 0;
+}
+
+td .tclcon {
+    margin-left: 2.3em;
+}
+
+/*
+ * Miscellaneous
+ */
+
+#brdmenu,
+#brdwelcome {
+    padding: 6px 20px;
+}
+#onlinelist {
+    padding-top: 6px;
+}
+#djangobbwrap {
+    width: auto;
+    text-align: left;
+}
+#djangobbindex .blocktable .box-content {
+    width: 100%;
+    padding: 0;
+}
+
+.djangobb .new_topic {
+    float: right;
+    margin: 4px 5px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.box-content .tclcon > h3 {
+    display: inline;
+}
+
+.blocktable .box .box-content .tcl {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/*
+ * Post Boxes
+ */
+
+.blockpost .box {
+    margin-bottom: 10px;
+}
+.blockpost + .linksb {
+    margin-top: -10px;
+    margin-bottom: 38px;
+}
+
+.blockpost div.box {
+    border: 0;
+    background-color: #107da8;
+    border-top: 1px solid #107da8;
+}
+.blockpost .box-head {
+    border-top-color: rgba(255, 255, 255, 0.2);
+}
+.blockpost .box-content {
+    border: 1px solid #e0e0e0;
+    border-top: 0;
+}
+.blockpost .box-head,
+.blockpost .box-head span.conr,
+.blockpost .box-head a,
+.blockpost .box-head a:link,
+.blockpost .box-head a:active,
+.blockpost .box-head a:hover,
+.blockpost .box-head a:visited {
+    background-color: transparent;
+    color: #fff;
+    text-shadow: none;
+    font-size: 1em;
+}
+
+.tcl .topic_isread {
+    font-weight: normal;
+}
+
+/* distinguish moderator only features from others - for testing purposes, and maybe beyond? */
+.moderator-only {
+    background-color: #ffb;
+}
+.admin-only {
+    background-color: #fc0;
+}
+
+/* Boxes */
+
+.box .box-head h4 {
+    display: block;
+}
+.box-content {
+    padding: 12px 20px;
+}
+.blockpost .box-content {
+    padding: 0;
+}
+#brdfooter .box-content {
+    border-top: 0;
+}
+
+/* Forms */
+
+.form-submit {
+    margin-top: 20px;
+}
+.form-submit .button {
+    margin: 0 6px 0 0;
+}
+
+.form-help {
+    clear: both;
+    margin: 0 0 10px;
+    position: relative;
+    top: -10px;
+}
+.djangobb label {
+    margin-bottom: 20px;
+}
+.djangobb label strong {
+    display: block;
+    margin-bottom: 5px;
+}
+.djangobb label strong .secondary {
+    font-weight: normal;
+}
+.djangobb label input[type=checkbox],
+.djangobb label input[type=checkbox] + strong {
+    display: inline-block;
+}
+.djangobb input.small {
+    margin: 1em;
+}
+
+.djangobb form input[type=text],
+.djangobb form input[type=password] {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    height: auto;
+    width: 100%;
+}
+
+.djangobb #subscribe {
+    margin: -10px 0;
+}
+.djangobb #subscribe .success {
+    color: green;   
+    background: url('https://cdn.scratch.mit.edu/scratchr2/static/__5b3e40ec58a840b41702360e9891321b__//djangobb_forum/themes/scratch_default_theme_copy/../../../images/icons_sm.png') no-repeat top;
+    background-position: -15px -644px;
+    padding: 8px 0 8px 27px;
+    vertical-align: middle;
+}
+.djangobb #subscribe .error {
+    color: #FF0000;
+    padding: 3px 0;
+}
+.djangobb #subscribe .loading {
+    display: none;
+}
+
+.djangobb .markItUpEditor {
+    width: 100%;
+    vertical-align: top;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.linkst .follow-topic {
+    top: -35px;
+}
+.follow-topic {
+    text-align: right;
+    position: absolute;
+    right: 0;
+}
+.follow-topic .loading {
+    vertical-align: middle;
+}
+.follow-topic .error {
+    color: red;
+    font-size: smaller;
+}
+.follow-topic .button {
+    line-height: 1;
+    height: inherit;
+    padding: 9px 10px;
+}
+.follow-topic .follow-button:hover {
+    color: white;
+}
+
+.follow-topic form {
+    display: inline;
+}
+
+/*
+ * Resets
+ */
+
+.djangobb table,
+.djangobb form,
+.djangobb pre,
+.djangobb blockquote,
+.djangobb ul,
+.djangobb ol,
+.djangobb dl,
+.djangobb dt,
+.djangobb dd,
+.djangobb th,
+.djangobb td,
+.djangobb img {
+	margin: 0;
+	padding: 0;
+	font-weight: normal;
+	list-style: none;
+}
+p, li {
+	margin: 0;
+}
+.djangobb img {
+	border: 0;
+}
+.djangobb input,
+.djangobb select,
+.djangobb textarea,
+.djangobb optgroup {
+	margin: 0;
+}
+
+/*
+ * Structural
+ */
+
+.djangobb .clearer,
+.djangobb .nosize {
+	height: 0;
+	width: 0;
+	line-height: 0;
+	font-size: 0;
+	overflow: hidden;
+}
+.djangobb .clearer,
+.djangobb .clearb {
+	clear: both;
+}
+.djangobb .nosize {
+	position: absolute;
+	left: -10000px;
+}
+
+.box,
+.blockpost .box,
+.postleft,
+.postsignature,
+.postmsg {
+	overflow: hidden;
+}
+#reply {
+	overflow: visible;
+}
+.searchposts .postmsg {
+    /* add scoll bars on small postmsg in search results */
+    overflow: auto;
+}
+
+/*
+ * Bug Fixes
+ */
+
+/* This attempts to eliminate rounding errors in Gecko browsers. */
+
+div > div > div.postfootleft,
+div > div > div.postfootright {
+	padding-top: 1px;
+	margin-top: -1px;
+}
+
+/* This is only visible to IE Windows and cures various bugs. Do not alter comments */
+
+/* Begin IEWin Fix \*/
+* html .inbox, * html .inform, * html .djangobb, * html .intd, * html .tclcon {
+	height: 1px;
+}
+* html .inbox div.postmsg {
+	width: 98%;
+}
+/* End of IEWin Fix */
+
+#brdmenu strong {
+	line-height: 0;
+}
+
+/*
+ * Hidden
+ */
+
+#modcontrols dt,
+#searchlinks dt,
+.postright h3 {
+	position: absolute;
+	display: block;
+	overflow: hidden;
+	width: 1em;
+	left: -999em;
+}
+
+/*
+ * Floats
+ */
+
+.conr {
+	float: right;
+	text-align: right;
+	clear: right;
+	width: 40%;
+}
+.conl {
+	float: left;
+	width: 55%;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+label.conl {
+	width: auto;
+	overflow: visible;
+	margin-right: 10px;
+}
+
+.linkst .pagination,
+.linksb .pagination {
+	float: right;
+	width: auto;
+}
+
+/*
+ * Tables
+ */
+
+/* 6.1 Table Basic Setup */
+
+.djangobb table {
+	width: 100%;
+}
+
+/* 6.2 Fixed Table Setup */
+
+#djangobbindex table,
+#vf table {
+	table-layout: fixed;
+}
+.tcl {
+	text-align: left;
+	width: 50%;
+}
+.tc2,
+.tc3,
+.tcmod {
+	width: 9%;
+	text-align: center;
+}
+.tcr {
+	width: 32%;
+	text-align: left;
+}
+#djangobbsearch #vf .tcl,
+#djangobbmoderate #vf .tcl {
+	width: 41%;
+}
+#djangobbsearch #vf .tc2 {
+	width: 18%;
+	text-align: left;
+}
+.tcl,
+.tcr {
+	overflow: hidden;
+}
+
+/*
+ * User List
+ */
+
+#users1 .tcl {
+	width: 40%;
+}
+#users1 .tcr {
+	width: 25%;
+}
+#users1 .tc2 {
+	width: 25%;
+	text-align: left;
+}
+#users1 .tc3 {
+	width: 10%;
+	text-align: center;
+}
+
+/*
+ * Posts
+ */
+
+.postleft,
+.postfootleft {
+	float: left;
+	width: 16em;
+	overflow: hidden;
+}	
+.postright,
+.postfootright {
+	border-left-width: 16em;
+	border-left-style: solid
+}
+.postfootright,
+.multidelete {
+	text-align: right;
+}
+div.blockpost > div > div.inbox {
+	padding-bottom: 1px;
+}
+
+.postmsg {
+	width: 100%;
+}
+
+/* Overflow and Scrolling */
+
+.incqbox {
+	width: 100%;
+	overflow: hidden;
+}
+.scrollbox {
+	width: 100%;
+	overflow: auto;
+}
+.postmsg img {
+    max-width: 100%;
+}
+.postsignature {
+    max-height: 168px;
+}
+.postsignature img {
+    max-height: 150px;
+}
+.post_body_html {
+	white-space: pre-wrap;
+	word-wrap: break-word;
+}
+
+.postsignature .edit-signature {
+	float: right;
+}
+.postsignature hr {
+	margin-left: 0;
+	width: 200px;
+	text-align: left;
+	height: 1px;
+	border: 0;
+}
+.searchposts .postmsg {
+	height: 8em;
+}
+
+/*
+ * BBCode
+ */
+.bb-underline {
+	text-decoration: underline;
+}
+.bb-italic {
+	font-style: italic;
+}
+.bb-bold {
+	font-weight: bold;
+}
+.bb-strikethrough {
+	text-decoration: line-through;
+}
+.bb-big {
+	font-size: 17px;
+}
+.bb-small {
+	font-size: 10px;
+}
+
+.bb-quote-author {
+	font-weight: bold;
+	margin-bottom: 6px;
+}
+
+.postmsg li {
+	margin: 0 0 0 32px;
+}
+.postmsg ul,
+.postmsg ol {
+	margin: 12px 0;
+}
+.postmsg ul li {
+    list-style-type: disc;
+}
+.postmsg ol li {
+    list-style-type: decimal;
+}
+
+/*
+ * Lists
+ */
+
+#onlinelist dd,
+#onlinelist dt,
+#brdmenu li,
+.linkst li,
+.linksb li,
+.postlinksb li,
+.postfootright li,
+.bblinks li {
+	display: inline;
+	height: 0;
+}
+
+#posterror ul li {
+	list-style: square inside;
+}
+
+/*
+ * Forms
+ */
+
+.djangobb label {
+	display: block;
+}
+
+/*
+ * Help
+ */
+
+#helpfile h2 {
+	margin-top: 12px;
+}
+#helpfile .box {
+	padding: 10px;
+}
+#djangobbredirect .block,
+#djangobbmaint .block {
+	margin: 50px 20% 12px 20%;
+}
+#brdfooter .foot {
+	margin-top: 12px;
+}
+
+/*
+ * Errors
+ */
+
+.djangobb input#id_captcha_1 {
+	font-size: 22px;
+	margin-left: 10px;
+	width: 88px;
+}
+
+.djangobb ul.errorlist {
+	margin-bottom: 12px;
+	padding: 9px 10px;
+	border-style: solid;
+	border-width: 1px;
+	background-color: #f5f5f5;
+	border-color: #ff0000;
+	color: #FF0000;
+}
+
+.djangobb img.rss {
+	float: right;
+}
+
+.djangobb img.breadcrumb_rss {
+	vertical-align: top;
+	position: relative;
+	top: 1px;
+}
+
+.djangobb .left {
+	float: left;
+	background: #DDE7EF;
+}
+.message {
+	padding: 20px 20px 15px;
+}
+
+/*
+ * Basic Colors
+ */
+
+.djangobb blockquote,
+.code {
+    background-color: #f7f7f7;
+}
+.djangobb th {
+    background-color: #eee;
+}
+.tc2,
+.tc3,
+.tcmod,
+#postpreview,
+.forminfo,
+.blockmenu .box,
+#adstats dd {
+    background-color: #f5f5f5;
+}
+
+.djangobb .blockmenu .isactive a,
+#posterror li strong {
+    color: #46586a;
+}
+
+.djangobb td,
+.djangobb th {
+    border-color: #e0e0e0;
+}
+
+/*
+ * Posts
+ */
+
+.blockpost .box-content,
+.postright,
+.postfootright {
+    background-color: #fff;
+}
+.postright, 
+.postfootright {
+    border-left-color: #f7f7f7;
+    box-shadow: inset 1px 0 #e0e0e0;
+}
+.postleft, 
+.postfootleft, 
+.blockpost label {
+    background-color: #f7f7f7;
+    box-shadow: 1px 0 #e0e0e0;
+}
+
+.djangobb hr {
+    background-color: #ccc;
+}
+.posteditmessage {
+    color: #aaa;
+}
+
+.djangobb blockquote,
+.code,
+.forminfo,
+.blockpost label {
+    border-color: #ccc;
+}
+
+/*
+ * Icons
+ */
+
+.iclosed {
+    background-image: url(https://cdn.scratch.mit.edu/scratchr2/static/__5b3e40ec58a840b41702360e9891321b__//djangobb_forum/themes/scratch_default_theme_copy/css/../img/icon/closed.png);
+}
+.inew {
+    background-image: url(https://cdn.scratch.mit.edu/scratchr2/static/__5b3e40ec58a840b41702360e9891321b__//djangobb_forum/themes/scratch_default_theme_copy/css/../img/icon/new.png);
+}
+.isticky {
+    background-image: url(https://cdn.scratch.mit.edu/scratchr2/static/__5b3e40ec58a840b41702360e9891321b__//djangobb_forum/themes/scratch_default_theme_copy/css/../img/icon/sticky.png);
+}
+.isticky.iclosed {
+    background-image: url(https://cdn.scratch.mit.edu/scratchr2/static/__5b3e40ec58a840b41702360e9891321b__//djangobb_forum/themes/scratch_default_theme_copy/css/../img/icon/sticky-closed.png);
+}
+.closed-topic a {
+    color: #888;
+}
+
+/*
+ * Miscellaneous
+ */
+
+/* Category disclosure toggle */
+.djangobb .box-head a.toggle  {
+    float: right;
+    background: url(https://cdn.scratch.mit.edu/scratchr2/static/__5b3e40ec58a840b41702360e9891321b__//djangobb_forum/themes/scratch_default_theme_copy/css/../img/cat_minimize.png);
+    display: block;
+    height: 17px;
+    line-height: 1px;
+    outline-color: -moz-use-text-color;
+    outline-style: none;
+    outline-width: 0;
+    text-indent: -3000em;
+    width: 28px;
+}
+.djangobb .collapsed a.toggle {
+    background-image: url(https://cdn.scratch.mit.edu/scratchr2/static/__5b3e40ec58a840b41702360e9891321b__//djangobb_forum/themes/scratch_default_theme_copy/css/../img/cat_maximize.png);
+}
+

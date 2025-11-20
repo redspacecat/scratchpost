@@ -3,7 +3,7 @@
     "rewrites": [
         {
             "source": "/topic/:id",
-            "destination": "/topic.html"
+            "destination": "/static/topic.html"
         },
         {
             "source": "/(.*)",

@@ -1,5 +1,5 @@
 const path = require("path");
-const api = require("api.js");
+const api = require("./api.js");
 const fs = require("fs");
 
 const fastify = require("fastify")({

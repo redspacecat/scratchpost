@@ -34,15 +34,20 @@
             width: 100%;
         }
 
-        .post .date {
+        .post .post-top {
             background-color: #107da8;
             color: white;
             padding: 7px;
             border-radius: 7px 7px 0 0;
         }
 
+        .post .post-number {
+            float: right;
+        }
+
         .post .left {
             padding: 10px;
+            width: 200px;
         }
 
         .post .left img {
@@ -56,10 +61,12 @@
         }
     </style>
     <link rel="stylesheet" href="/static/css/posts.css">
+    <script src="https://cdn.scratch.mit.edu/scratchr2/static/__5b3e40ec58a840b41702360e9891321b__//djangobb_forum/scratchblocks/scratchblocks.min.js"></script>
+    <script src="https://cdn.scratch.mit.edu/scratchr2/static/__5b3e40ec58a840b41702360e9891321b__//djangobb_forum/scratchblocks/translations.js"></script>
 </head>
 
 <body>
-    <h2>Viewing Topic</h2>
+    <h2>Loading Topic...</h2>
     <div id="posts_container" class="djangobb"></div>
     <script src="/static/js/main.js"></script>
 </body>

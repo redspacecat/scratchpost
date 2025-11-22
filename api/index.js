@@ -6,7 +6,7 @@ const fastify = require("fastify")({
     ignoreTrailingSlash: true,
 });
 async function main() {
-    await fastify.register(import("@fastify/rate-limit"), { global: true, max: 20, timeWindow: 60 * 1000 });
+    await fastify.register(import("@fastify/rate-limit"), { global: true, max: 150, timeWindow: 120 * 1000 });
 
     // Setup our static files
     fastify.register(require("@fastify/static"), {

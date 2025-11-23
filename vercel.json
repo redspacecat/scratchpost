@@ -6,6 +6,14 @@
             "destination": "/static/topic.html"
         },
         {
+            "source": "/post/:id",
+            "destination": "/static/topic.html"
+        },
+        {
+            "source": "/user/:id",
+            "destination": "/static/user.html"
+        },
+        {
             "source": "/(.*)",
             "destination": "/api"
         }

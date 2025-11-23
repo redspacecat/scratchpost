@@ -11,6 +11,11 @@
             margin: 0 auto;
         }
 
+        #title_container {
+            margin: 0 auto;
+            width: fit-content;
+        }
+
         .post {
             margin: 10px;
             border: 2px solid lightgray;
@@ -56,17 +61,38 @@
             height: 90px;
         }
 
+        .post .date:hover {
+            text-decoration: underline;
+        }
+
+        .post .date {
+            color: white;
+            text-decoration: none;
+        }
+
+        .post .left {
+            background-color: #f7f7f7 !important;
+            box-shadow: 1px 0 #e0e0e0 !important;
+        }
+
         body {
             font-family: "helvetica neue", arial, sans-serif;
         }
     </style>
     <link rel="stylesheet" href="/static/css/posts.css">
-    <script src="https://cdn.scratch.mit.edu/scratchr2/static/__5b3e40ec58a840b41702360e9891321b__//djangobb_forum/scratchblocks/scratchblocks.min.js"></script>
-    <script src="https://cdn.scratch.mit.edu/scratchr2/static/__5b3e40ec58a840b41702360e9891321b__//djangobb_forum/scratchblocks/translations.js"></script>
+    <script
+        src="https://cdn.scratch.mit.edu/scratchr2/static/__5b3e40ec58a840b41702360e9891321b__//djangobb_forum/scratchblocks/scratchblocks.min.js"></script>
+    <script
+        src="https://cdn.scratch.mit.edu/scratchr2/static/__5b3e40ec58a840b41702360e9891321b__//djangobb_forum/scratchblocks/translations.js"></script>
 </head>
 
 <body>
-    <h2>Loading Topic...</h2>
+    <h2>Loading...</h2>
+    <div id="title_container" hidden>
+        <a id="subforum" target="_blank"></a>
+        <span>&raquo;</span>
+        <a id="topic" target="_blank"></a>
+    </div>
     <div id="posts_container" class="djangobb"></div>
     <script src="/static/js/main.js"></script>
 </body>

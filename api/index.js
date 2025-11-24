@@ -23,6 +23,7 @@ async function main() {
 
     fastify.get("/api/topic/:topic", api.topic)
     fastify.get("/api/post/:post", api.topic)
+    fastify.get("/api/user/:user", api.user)
 
     fastify.listen({ port: process.env.PORT, host: "0.0.0.0" }, function (err, address) {
         if (err) {

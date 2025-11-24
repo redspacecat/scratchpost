@@ -11,11 +11,25 @@
         },
         {
             "source": "/user/:id",
-            "destination": "/static/user.html"
+            "destination": "/static/topic.html"
         },
         {
             "source": "/(.*)",
             "destination": "/api"
+        }
+    ],
+    "redirects": [
+        {
+            "source": "/t/:id",
+            "destination": "/topic/:id"
+        },
+        {
+            "source": "/p/:id",
+            "destination": "/post/:id"
+        },
+        {
+            "source": "/u/:id",
+            "destination": "/user/:id"
         }
     ]
 }

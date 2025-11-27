@@ -25,6 +25,12 @@ function handlePostCounts(data) {
     postCounts = handlePostCounts(postCounts.split("\n"));
     console.log(postCounts);
     response = await response.json();
+    if (response.error) {
+        document.querySelector("h2").remove()
+        document.querySelector("#title_container").hidden = false;
+        document.querySelector("#title_container").innerText = `Error: ${response.error}`
+        return
+    }
 
     let posts;
 

@@ -14,6 +14,22 @@
             "destination": "/static/topic.html"
         },
         {
+            "source": "/user/:id/count",
+            "destination": "https://redspacecat.alwaysdata.net/count/:id"
+        },
+        {
+            "source": "/user/:id/first",
+            "destination": "https://redspacecat.alwaysdata.net/first/:id"
+        },
+        {
+            "source": "/user/:id/posts",
+            "destination": "https://redspacecat.alwaysdata.net/user/:id"
+        },
+        {
+            "source": "/",
+            "destination": "/static/home.html"
+        },
+        {
             "source": "/(.*)",
             "destination": "/api"
         }

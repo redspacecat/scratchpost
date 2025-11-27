@@ -14,15 +14,15 @@
             "destination": "/static/topic.html"
         },
         {
-            "source": "/user/:id/count",
+            "source": "/api/user/:id/count",
             "destination": "https://redspacecat.alwaysdata.net/count/:id"
         },
         {
-            "source": "/user/:id/first",
+            "source": "/api/user/:id/first",
             "destination": "https://redspacecat.alwaysdata.net/first/:id"
         },
         {
-            "source": "/user/:id/posts",
+            "source": "/api/user/:id/posts",
             "destination": "https://redspacecat.alwaysdata.net/user/:id"
         },
         {

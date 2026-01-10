@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum Leaderboards & Stats - ScratchPost</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <style>
+        .loader3 {
+            width: 32px;
+            padding: 8px;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: #25b09b;
+            --_m:
+                conic-gradient(#0000 10%, #000),
+                linear-gradient(#000 0 0) content-box;
+            -webkit-mask: var(--_m);
+            mask: var(--_m);
+            -webkit-mask-composite: source-out;
+            mask-composite: subtract;
+            animation: l3 1s infinite linear;
+        }
+
+        @keyframes l3 {
+            to {
+                transform: rotate(1turn)
+            }
+        }
+
+        div:has(> .loader3) {
+            margin: 10px auto;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    <style>
+        #table {
+            border: 2px solid black;
+            border-collapse: collapse;
+        }
+
+        #table td {
+            border: 2px solid black;
+            padding: 4px;
+        }
+
+        .forum-user-link {
+            color: black;
+            text-decoration: none;
+        }
+
+        .forum-user-link:hover {
+            color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="nav">
+        <a href="/">ScratchPost</a>
+        <a href="/search">Search</a>
+        <a href="/leaderboards">Forum Leaderboards</a>
+        <a href="/view">View a User</a>
+    </nav>
+    <div class="page" style="margin: 30px;">
+        <h2 style="text-align: center;">Scratch Forum Leaderboards</h2>
+        <div style="display: flex;gap: 30px;">
+            <div style="min-width: 400px;">
+                <div style="margin-top: 5px;" class="cf">
+                    <span>Category: </span>
+                    <select id="categorySwitcher" onchange="changeCategory()">
+                        <option value="All">All</option>
+                        <optgroup label="Welcome to Scratch"> <!-- list from postpercent -->
+                            <option value="Announcements">Announcements</option>
+                            <option value="New Scratchers">New Scratchers</option>
+                        </optgroup>
+                        <optgroup label="Making Scratch Projects">
+                            <option value="Help With Scripts">Help With Scripts</option>
+                            <option value="Show and Tell">Show and Tell</option>
+                            <option value="Project Ideas">Project Ideas</option>
+                            <option value="Collaboration">Collaboration</option>
+                            <option value="Requests">Requests</option>
+                        </optgroup>
+                        <optgroup label="About Scratch">
+                            <option value="Questions about Scratch">Questions about Scratch</option>
+                            <option value="Suggestions">Suggestions</option>
+                            <option value="Bugs and Glitches">Bugs and Glitches</option>
+                            <option value="Advanced Topics">Advanced Topics</option>
+                            <option value="Connecting to the Physical World">Connecting to the Physical World</option>
+                            <option value="Developing Scratch Extensions">Developing Scratch Extensions</option>
+                            <option value="Open Source Projects">Open Source Projects</option>
+                        </optgroup>
+                        <optgroup label="Interests Beyond Scratch">
+                            <option value="Things I'm Making and Creating">Things I'm Making and Creating</option>
+                            <option value="Things I'm Reading and Playing">Things I'm Reading and Playing</option>
+                        </optgroup>
+                        <optgroup label="Scratch Around the World">
+                            <option value="Africa">Africa</option>
+                            <option value="Bahasa Indonesia">Bahasa Indonesia</option>
+                            <option value="Català">Català</option>
+                            <option value="Deutsch">Deutsch</option>
+                            <option value="Ελληνικά">Ελληνικά</option>
+                            <option value="Español">Español</option>
+                            <option value="فارسی">فارسی</option>
+                            <option value="Français">Français</option>
+                            <option value="עברית">עברית</option>
+                            <option value="हिन्दी">हिन्दी</option>
+                            <option value="한국어">한국어</option>
+                            <option value="Italiano">Italiano</option>
+                            <option value="Nederlands">Nederlands</option>
+                            <option value="日本語">日本語</option>
+                            <option value="Norsk">Norsk</option>
+                            <option value="Polski">Polski</option>
+                            <option value="Português">Português</option>
+                            <option value="Pусский">Pусский</option>
+                            <option value="Türkçe">Türkçe</option>
+                            <option value="中文">中文</option>
+                            <option value="Other Languages">Other Languages</option>
+                            <option value="Translating Scratch">Translating Scratch</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <div style="margin-top: 5px;" class="cf">
+                    <a id="prev">&lt; Previous Page</a>
+                    <input type="number" placeholder="Page #" id="gopage">
+                    <a id="next">Next Page &gt;</a>
+                </div>
+                <br>
+                <div id="list"></div>
+                <div class="cf">
+                    <div class="loader3"></div>
+                </div>
+                <table id="table" class="c" hidden style="width: 400px;">
+                    <tr style="font-weight: bold;text-align: center;">
+                        <td>Username</td>
+                        <td>Posts</td>
+                    </tr>
+                </table>
+            </div>
+            <div style="width: 100%">
+                <h3 class="cf">Top Posters of All Time</h3>
+                <div class="cf" id="topAll-loader">
+                    <div class="loader3"></div>
+                </div>
+                <canvas id="topAll"></canvas>
+                <h3 class="cf">Top Posters of the Past Week</h3>
+                <div class="cf" id="topWeek-loader">
+                    <div class="loader3"></div>
+                </div>
+                <canvas id="topWeek"></canvas>
+                <h3 class="cf">Top Posters of the Past Month</h3>
+                <div class="cf" id="topMonth-loader">
+                    <div class="loader3"></div>
+                </div>
+                <canvas id="topMonth"></canvas>
+                <h3 class="cf">Top Posters of the Past Year</h3>
+                <div class="cf" id="topYear-loader">
+                    <div class="loader3"></div>
+                </div>
+                <canvas id="topYear"></canvas>
+            </div>
+        </div>
+    </div>
+    <script>
+        // const params = new URLSearchParams(location.search)
+        // const category = params.get("category") || null
+        // const 
+
+        function changeCategory() {
+            let target = document.querySelector("#categorySwitcher").value
+            location.search = `?category=${categories[target]}`
+        }
+
+        function htmlToNode(html) {
+            const template = document.createElement('template');
+            template.innerHTML = html;
+            const nNodes = template.content.childNodes.length;
+            return template.content.firstChild;
+        }
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        (async function go() {
+            let searchParams = new URLSearchParams(location.search)
+            window.page = searchParams.get("page") || 1
+            window.category = searchParams.get("category") || 0
+            document.querySelector("#categorySwitcher").value = ""
+            document.querySelector("#prev").href = "?page=" + (parseInt(page) - 1) + "&category=" + category
+            document.querySelector("#next").href = "?page=" + (parseInt(page) + 1) + "&category=" + category
+            document.querySelector("#gopage").value = page
+            if (page == 1) {
+                document.querySelector("#prev").hidden = true
+            }
+            console.log(page)
+            let data = (await (await fetch(`/api/leaderboard${category ? "?category=" + category : ""}${(category ? "&" : "?") + "offset=" + (page - 1) * 1000}`)).json())
+            // for ([i, d] of data.entries()) {
+            //     // data[i] = JSON.parse(d)
+            //     const item = d.split(",")
+            //     data[i] = { user: item[0], count: parseInt(item[1].trim()) }
+            // }
+
+            // if (page > Math.floor(data.length / 1000)) {
+            //     document.querySelector("#next").hidden = true
+            // }
+
+            console.log(data)
+            window.data = data
+            container = document.querySelector("#list")
+            container2 = document.querySelector("#table")
+            let max = data[0].count
+            let i2 = 0
+            // if (page == 1) {
+            //     i2 = 0
+            // } else {
+            //     i2 = (page - 1) * 1000
+            // }
+            let base = i2
+            let mode = 0
+            for (let [i, item] of data.entries()) {
+                user = data[i + base]
+                /*if (mode == 0) {
+                    if (i2 > -1) {
+                        mode = 1
+                        continue
+                    }
+                    newEl = htmlToNode(`<div data-target-width="${(user.count / max * 100).toFixed(3)}%" style="width: fit-content; margin: 5px auto;" class="item"><span style="margin: 0px 5px;">#${i2 + 1}</span><span>${user.user}</span><span style="margin-left: auto;margin-right: 10px;">${user.count}</span></div>`)
+                    container.appendChild(newEl)
+                    if (i2 > -1) mode = 1
+                } else {*/
+                newEl = htmlToNode(`<tr id="${i2 - base}"><td>#${i2 + 1} <a class="forum-user-link" target="_blank" href="/users/${user.username}">${user.username}</td><td style="width: 60px;text-align: center;">${user.count}</td></tr>`)
+                container2.appendChild(newEl)
+                if (i2 > 1000 + base - 2) break
+                i2++
+                if (i2 == data.length) break
+            }
+
+            document.querySelector("#table").hidden = false
+            document.querySelector(".loader3").style.display = "none"
+
+            const lastWeek = new Date(Date.now() - (7 * 24 * 60 * 60 * 1000)).toISOString().substring(0, 10);
+            const lastMonth = new Date(Date.now() - (31 * 24 * 60 * 60 * 1000)).toISOString().substring(0, 10);
+            const lastYear = new Date(Date.now() - (365 * 24 * 60 * 60 * 1000)).toISOString().substring(0, 10);
+            const allTime = null;
+            console.log(lastWeek, lastMonth, lastYear)
+
+            await createChart("#topAll", allTime)
+            await createChart("#topWeek", lastWeek)
+            await createChart("#topMonth", lastMonth)
+            await createChart("#topYear", lastYear)
+            async function createChart(container, timeFrame) {
+
+                let data2 = (await (await fetch(`/api/leaderboard?limit=20${timeFrame ? "&time=" + timeFrame : ""}${category ? "&category=" + category : ""}`)).json())
+                console.log(data2)
+                const ctx = document.querySelector(container)
+                document.querySelector(`${container}-loader`).style.display = "none"
+
+                var chartData = {
+                    labels: data2.map(el => el.username),
+                    datasets: [
+                        {
+                            label: 'Posts',
+                            data: data2.map(el => el.count),
+                            backgroundColor: "#ffc354"
+                        }
+                    ]
+                };
+
+                var myBar = new Chart(ctx, {
+                    type: "bar",
+                    data: chartData,
+                    options: {
+                        plugins: {
+                            tooltip: {
+                                mode: 'index',
+                                intersect: false,
+                            },
+                            legend: {
+                                display: false
+                            },
+                            hover: {
+                                mode: 'index',
+                                intersect: false
+                            },
+                            responsive: true
+                        }
+                    }
+                })
+            }
+        })()
+
+    </script>
+    <script type="module">
+        import categoryMap from "https://cdn.jsdelivr.net/gh/jeffalo/ocular@f321922b56d96f5aa4b135315cc252ba95b3e807/assets/category-map.js" // thanks to jeffalo!
+        const f = obj => Object.fromEntries(Object.entries(obj).map(a => a.reverse()))
+        window.categories = f(Object.fromEntries(categoryMap))
+        window.categories["All"] = "0"
+        window.categories2 = Object.fromEntries(categoryMap)
+        window.categories2["0"] = "All"
+        document.querySelector("#categorySwitcher").value = categories2[category]
+    </script>
+</body>
+
+</html>

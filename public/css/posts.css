@@ -1,3 +1,133 @@
+#posts_container {
+    width: fit-content;
+    margin: 0 auto;
+}
+
+#title_container {
+    margin: 0 auto;
+    width: fit-content;
+}
+
+.post {
+    margin: 10px;
+    border: 2px solid lightgray;
+    border-radius: 10px;
+    width: 940px;
+}
+
+.post .container {
+    display: flex;
+}
+
+.post .content {
+    margin: 15px;
+}
+
+.post .left {
+    border-radius: 0 0 0 7px;
+}
+
+.post .right {
+    width: 100%;
+}
+
+.post .post-top {
+    background-color: #28a5da;
+    color: white;
+    padding: 7px;
+    border-radius: 7px 7px 0 0;
+}
+
+.post .post-number {
+    float: right;
+}
+
+.post .left {
+    padding: 10px;
+    width: 200px !important;
+}
+
+.post .left img {
+    margin-top: 5px;
+    width: 90px;
+    height: 90px;
+}
+
+.post .date:hover,
+.topic:hover,
+.subforum:hover,
+.scratch:hover,
+.id:hover {
+    text-decoration: underline;
+}
+
+.post .date,
+.topic,
+.subforum,
+.scratch,
+.id {
+    color: white;
+    text-decoration: none;
+}
+
+.post .content {
+    max-height: 275px;
+    overflow-y: scroll;
+}
+
+.post .scratch {
+    float: right;
+    margin-right: 5px;
+}
+
+.post .id {
+    margin-right: 10px;
+}
+
+.post .date {
+    width: 180px;
+    display: inline-block;
+}
+
+.topic-subforum-divider {
+    margin: 0 5px;
+}
+
+.post .left {
+    background-color: #f7f7f7 !important;
+    box-shadow: 1px 0 #e0e0e0 !important;
+}
+
+.post .user-link {
+    text-decoration: none;
+    color: black;
+}
+
+.post .username:hover {
+    text-decoration: underline;
+    color: blue;
+}
+
+.post .content img {
+    max-width: 100%;
+}
+
+.post .right {
+    overflow: hidden;
+}
+
+.post .scratchblocks {
+    max-width: 100%;
+    overflow-x: scroll;
+}
+
+.post {
+    border: 1px solid #e0e0e0;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    box-shadow: 0 2px 3px rgba(34, 25, 25, 0.3);
+}
+
 /*
  * Text
  */
@@ -24,7 +154,7 @@
 }
 
 .djangobb pre {
-    font-size: .9em;
+    font-size: 0.9em;
     font-family: Menlo, Monaco, Consolas, "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
 }
 .djangobb pre.blocks {
@@ -113,7 +243,8 @@
  * Tables
  */
 
-.djangobb th, .djangobb td {
+.djangobb th,
+.djangobb td {
     border-bottom: 0;
     border-right: 0;
     padding: 4px 6px;
@@ -143,7 +274,8 @@
     text-shadow: none;
 }
 
-dd.usercontacts, dd.postavatar {
+dd.usercontacts,
+dd.postavatar {
     margin-top: 5px;
 }
 dd.postavatar {
@@ -157,7 +289,7 @@ dd.postavatar {
     padding-top: 15px;
 }
 .postmsg p {
-    padding: 0
+    padding: 0;
 }
 
 .postmsg h4 {
@@ -203,7 +335,7 @@ dd.postavatar {
     width: 16px;
 }
 .djangobb .tcl img.rss {
-    margin-top: .8em;
+    margin-top: 0.8em;
 }
 
 .searchposts .forumicon {
@@ -339,16 +471,16 @@ td .tclcon {
 .djangobb label strong .secondary {
     font-weight: normal;
 }
-.djangobb label input[type=checkbox],
-.djangobb label input[type=checkbox] + strong {
+.djangobb label input[type="checkbox"],
+.djangobb label input[type="checkbox"] + strong {
     display: inline-block;
 }
 .djangobb input.small {
     margin: 1em;
 }
 
-.djangobb form input[type=text],
-.djangobb form input[type=password] {
+.djangobb form input[type="text"],
+.djangobb form input[type="password"] {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     height: auto;
@@ -359,14 +491,14 @@ td .tclcon {
     margin: -10px 0;
 }
 .djangobb #subscribe .success {
-    color: green;   
-    background: url('https://cdn.scratch.mit.edu/scratchr2/static/__5b3e40ec58a840b41702360e9891321b__//djangobb_forum/themes/scratch_default_theme_copy/../../../images/icons_sm.png') no-repeat top;
+    color: green;
+    background: url("https://cdn.scratch.mit.edu/scratchr2/static/__5b3e40ec58a840b41702360e9891321b__//djangobb_forum/themes/scratch_default_theme_copy/../../../images/icons_sm.png") no-repeat top;
     background-position: -15px -644px;
     padding: 8px 0 8px 27px;
     vertical-align: middle;
 }
 .djangobb #subscribe .error {
-    color: #FF0000;
+    color: #ff0000;
     padding: 3px 0;
 }
 .djangobb #subscribe .loading {
@@ -424,22 +556,23 @@ td .tclcon {
 .djangobb th,
 .djangobb td,
 .djangobb img {
-	margin: 0;
-	padding: 0;
-	font-weight: normal;
-	list-style: none;
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+    list-style: none;
 }
-p, li {
-	margin: 0;
+p,
+li {
+    margin: 0;
 }
 .djangobb img {
-	border: 0;
+    border: 0;
 }
 .djangobb input,
 .djangobb select,
 .djangobb textarea,
 .djangobb optgroup {
-	margin: 0;
+    margin: 0;
 }
 
 /*
@@ -448,19 +581,19 @@ p, li {
 
 .djangobb .clearer,
 .djangobb .nosize {
-	height: 0;
-	width: 0;
-	line-height: 0;
-	font-size: 0;
-	overflow: hidden;
+    height: 0;
+    width: 0;
+    line-height: 0;
+    font-size: 0;
+    overflow: hidden;
 }
 .djangobb .clearer,
 .djangobb .clearb {
-	clear: both;
+    clear: both;
 }
 .djangobb .nosize {
-	position: absolute;
-	left: -10000px;
+    position: absolute;
+    left: -10000px;
 }
 
 .box,
@@ -468,10 +601,10 @@ p, li {
 .postleft,
 .postsignature,
 .postmsg {
-	overflow: hidden;
+    overflow: hidden;
 }
 #reply {
-	overflow: visible;
+    overflow: visible;
 }
 .searchposts .postmsg {
     /* add scoll bars on small postmsg in search results */
@@ -486,23 +619,27 @@ p, li {
 
 div > div > div.postfootleft,
 div > div > div.postfootright {
-	padding-top: 1px;
-	margin-top: -1px;
+    padding-top: 1px;
+    margin-top: -1px;
 }
 
 /* This is only visible to IE Windows and cures various bugs. Do not alter comments */
 
 /* Begin IEWin Fix \*/
-* html .inbox, * html .inform, * html .djangobb, * html .intd, * html .tclcon {
-	height: 1px;
+* html .inbox,
+* html .inform,
+* html .djangobb,
+* html .intd,
+* html .tclcon {
+    height: 1px;
 }
 * html .inbox div.postmsg {
-	width: 98%;
+    width: 98%;
 }
 /* End of IEWin Fix */
 
 #brdmenu strong {
-	line-height: 0;
+    line-height: 0;
 }
 
 /*
@@ -512,11 +649,11 @@ div > div > div.postfootright {
 #modcontrols dt,
 #searchlinks dt,
 .postright h3 {
-	position: absolute;
-	display: block;
-	overflow: hidden;
-	width: 1em;
-	left: -999em;
+    position: absolute;
+    display: block;
+    overflow: hidden;
+    width: 1em;
+    left: -999em;
 }
 
 /*
@@ -524,28 +661,28 @@ div > div > div.postfootright {
  */
 
 .conr {
-	float: right;
-	text-align: right;
-	clear: right;
-	width: 40%;
+    float: right;
+    text-align: right;
+    clear: right;
+    width: 40%;
 }
 .conl {
-	float: left;
-	width: 55%;
-	overflow: hidden;
-	white-space: nowrap;
+    float: left;
+    width: 55%;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 label.conl {
-	width: auto;
-	overflow: visible;
-	margin-right: 10px;
+    width: auto;
+    overflow: visible;
+    margin-right: 10px;
 }
 
 .linkst .pagination,
 .linksb .pagination {
-	float: right;
-	width: auto;
+    float: right;
+    width: auto;
 }
 
 /*
@@ -555,40 +692,40 @@ label.conl {
 /* 6.1 Table Basic Setup */
 
 .djangobb table {
-	width: 100%;
+    width: 100%;
 }
 
 /* 6.2 Fixed Table Setup */
 
 #djangobbindex table,
 #vf table {
-	table-layout: fixed;
+    table-layout: fixed;
 }
 .tcl {
-	text-align: left;
-	width: 50%;
+    text-align: left;
+    width: 50%;
 }
 .tc2,
 .tc3,
 .tcmod {
-	width: 9%;
-	text-align: center;
+    width: 9%;
+    text-align: center;
 }
 .tcr {
-	width: 32%;
-	text-align: left;
+    width: 32%;
+    text-align: left;
 }
 #djangobbsearch #vf .tcl,
 #djangobbmoderate #vf .tcl {
-	width: 41%;
+    width: 41%;
 }
 #djangobbsearch #vf .tc2 {
-	width: 18%;
-	text-align: left;
+    width: 18%;
+    text-align: left;
 }
 .tcl,
 .tcr {
-	overflow: hidden;
+    overflow: hidden;
 }
 
 /*
@@ -596,18 +733,18 @@ label.conl {
  */
 
 #users1 .tcl {
-	width: 40%;
+    width: 40%;
 }
 #users1 .tcr {
-	width: 25%;
+    width: 25%;
 }
 #users1 .tc2 {
-	width: 25%;
-	text-align: left;
+    width: 25%;
+    text-align: left;
 }
 #users1 .tc3 {
-	width: 10%;
-	text-align: center;
+    width: 10%;
+    text-align: center;
 }
 
 /*
@@ -616,36 +753,36 @@ label.conl {
 
 .postleft,
 .postfootleft {
-	float: left;
-	width: 16em;
-	overflow: hidden;
-}	
+    float: left;
+    width: 16em;
+    overflow: hidden;
+}
 .postright,
 .postfootright {
-	border-left-width: 16em;
-	border-left-style: solid
+    border-left-width: 16em;
+    border-left-style: solid;
 }
 .postfootright,
 .multidelete {
-	text-align: right;
+    text-align: right;
 }
 div.blockpost > div > div.inbox {
-	padding-bottom: 1px;
+    padding-bottom: 1px;
 }
 
 .postmsg {
-	width: 100%;
+    width: 100%;
 }
 
 /* Overflow and Scrolling */
 
 .incqbox {
-	width: 100%;
-	overflow: hidden;
+    width: 100%;
+    overflow: hidden;
 }
 .scrollbox {
-	width: 100%;
-	overflow: auto;
+    width: 100%;
+    overflow: auto;
 }
 .postmsg img {
     max-width: 100%;
@@ -657,57 +794,57 @@ div.blockpost > div > div.inbox {
     max-height: 150px;
 }
 .post_body_html {
-	white-space: pre-wrap;
-	word-wrap: break-word;
+    white-space: pre-wrap;
+    word-wrap: break-word;
 }
 
 .postsignature .edit-signature {
-	float: right;
+    float: right;
 }
 .postsignature hr {
-	margin-left: 0;
-	width: 200px;
-	text-align: left;
-	height: 1px;
-	border: 0;
+    margin-left: 0;
+    width: 200px;
+    text-align: left;
+    height: 1px;
+    border: 0;
 }
 .searchposts .postmsg {
-	height: 8em;
+    height: 8em;
 }
 
 /*
  * BBCode
  */
 .bb-underline {
-	text-decoration: underline;
+    text-decoration: underline;
 }
 .bb-italic {
-	font-style: italic;
+    font-style: italic;
 }
 .bb-bold {
-	font-weight: bold;
+    font-weight: bold;
 }
 .bb-strikethrough {
-	text-decoration: line-through;
+    text-decoration: line-through;
 }
 .bb-big {
-	font-size: 17px;
+    font-size: 17px;
 }
 .bb-small {
-	font-size: 10px;
+    font-size: 10px;
 }
 
 .bb-quote-author {
-	font-weight: bold;
-	margin-bottom: 6px;
+    font-weight: bold;
+    margin-bottom: 6px;
 }
 
 .postmsg li {
-	margin: 0 0 0 32px;
+    margin: 0 0 0 32px;
 }
 .postmsg ul,
 .postmsg ol {
-	margin: 12px 0;
+    margin: 12px 0;
 }
 .postmsg ul li {
     list-style-type: disc;
@@ -728,12 +865,12 @@ div.blockpost > div > div.inbox {
 .postlinksb li,
 .postfootright li,
 .bblinks li {
-	display: inline;
-	height: 0;
+    display: inline;
+    height: 0;
 }
 
 #posterror ul li {
-	list-style: square inside;
+    list-style: square inside;
 }
 
 /*
@@ -741,7 +878,7 @@ div.blockpost > div > div.inbox {
  */
 
 .djangobb label {
-	display: block;
+    display: block;
 }
 
 /*
@@ -749,17 +886,17 @@ div.blockpost > div > div.inbox {
  */
 
 #helpfile h2 {
-	margin-top: 12px;
+    margin-top: 12px;
 }
 #helpfile .box {
-	padding: 10px;
+    padding: 10px;
 }
 #djangobbredirect .block,
 #djangobbmaint .block {
-	margin: 50px 20% 12px 20%;
+    margin: 50px 20% 12px 20%;
 }
 #brdfooter .foot {
-	margin-top: 12px;
+    margin-top: 12px;
 }
 
 /*
@@ -767,37 +904,37 @@ div.blockpost > div > div.inbox {
  */
 
 .djangobb input#id_captcha_1 {
-	font-size: 22px;
-	margin-left: 10px;
-	width: 88px;
+    font-size: 22px;
+    margin-left: 10px;
+    width: 88px;
 }
 
 .djangobb ul.errorlist {
-	margin-bottom: 12px;
-	padding: 9px 10px;
-	border-style: solid;
-	border-width: 1px;
-	background-color: #f5f5f5;
-	border-color: #ff0000;
-	color: #FF0000;
+    margin-bottom: 12px;
+    padding: 9px 10px;
+    border-style: solid;
+    border-width: 1px;
+    background-color: #f5f5f5;
+    border-color: #ff0000;
+    color: #ff0000;
 }
 
 .djangobb img.rss {
-	float: right;
+    float: right;
 }
 
 .djangobb img.breadcrumb_rss {
-	vertical-align: top;
-	position: relative;
-	top: 1px;
+    vertical-align: top;
+    position: relative;
+    top: 1px;
 }
 
 .djangobb .left {
-	float: left;
-	background: #DDE7EF;
+    float: left;
+    background: #dde7ef;
 }
 .message {
-	padding: 20px 20px 15px;
+    padding: 20px 20px 15px;
 }
 
 /*
@@ -840,13 +977,13 @@ div.blockpost > div > div.inbox {
 .postfootright {
     background-color: #fff;
 }
-.postright, 
+.postright,
 .postfootright {
     border-left-color: #f7f7f7;
     box-shadow: inset 1px 0 #e0e0e0;
 }
-.postleft, 
-.postfootleft, 
+.postleft,
+.postfootleft,
 .blockpost label {
     background-color: #f7f7f7;
     box-shadow: 1px 0 #e0e0e0;
@@ -891,7 +1028,7 @@ div.blockpost > div > div.inbox {
  */
 
 /* Category disclosure toggle */
-.djangobb .box-head a.toggle  {
+.djangobb .box-head a.toggle {
     float: right;
     background: url(https://cdn.scratch.mit.edu/scratchr2/static/__5b3e40ec58a840b41702360e9891321b__//djangobb_forum/themes/scratch_default_theme_copy/css/../img/cat_minimize.png);
     display: block;
@@ -907,3 +1044,6 @@ div.blockpost > div > div.inbox {
     background-image: url(https://cdn.scratch.mit.edu/scratchr2/static/__5b3e40ec58a840b41702360e9891321b__//djangobb_forum/themes/scratch_default_theme_copy/css/../img/cat_maximize.png);
 }
 
+.djangobb .code {
+    overflow-x: scroll;
+}

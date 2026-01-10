@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results - ScratchPost</title>
+    <link rel="stylesheet" href="/css/posts.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <style>
+        .post .post-top {
+            border-radius: 10px !important;
+        }
+    </style>
+    <script
+        src="https://cdn.scratch.mit.edu/scratchr2/static/__5b3e40ec58a840b41702360e9891321b__//djangobb_forum/scratchblocks/scratchblocks.min.js"></script>
+    <script
+        src="https://cdn.scratch.mit.edu/scratchr2/static/__5b3e40ec58a840b41702360e9891321b__//djangobb_forum/scratchblocks/translations.js"></script>
+</head>
+
+<body>
+    <nav class="nav">
+        <a href="/">ScratchPost</a>
+        <a href="/search">Search</a>
+        <a href="/leaderboards">Forum Leaderboards</a>
+        <a href="/view">View a User</a>
+    </nav>
+    <div class="page">
+        <div class="cf" style="text-align: center;">
+            <h2>Search the Forums</h2>
+            <h3>Search Topics</h3>
+            <form action="/search/topics">
+                <label>Search Query: </label><input name="q" id="query" placeholder="Search query...">
+                <input type="submit" value="🔍 Search"><br>
+                <br>
+                <details style="text-align: left;">
+                    <summary>Options</summary>
+                    <label>Sort by: </label>
+                    <select name="sort">
+                        <option value="oldest">Oldest</option>
+                        <option value="newest">Newest</option>
+                    </select>
+                </details>
+            </form>
+        </div>
+        <div id="posts_container" class="djangobb"></div>
+        <h3 style="text-align: center;" id="loading-posts">Loading topics...</h3>
+        <button id="load-more-button">Load More</button>
+        <h2 style="text-align: center;" id="nothing-found" hidden>Nothing Found</h2>
+    </div>
+</body>
+
+<script type="module" src="/js/forms.js" defer></script>
+<script type="module" defer>
+    const params = new URLSearchParams(location.search)
+    document.querySelector("#query").value = params.get("q")
+    document.querySelector('form [name="sort"]').value = params.get("sort") || "sort"
+
+    function htmlToNode(htmlString) {
+        var div = document.createElement("div");
+        div.innerHTML = htmlString.trim();
+
+        return div.firstChild;
+    }
+
+    window.topicLimit = 80
+    window.topicOffset = 0
+    async function fetchMoreTopics() {
+        document.querySelector("#loading-posts").hidden = false
+        document.querySelector("#load-more-button").style.display = "none"
+        const topics = await (await fetch(`/api/search/topics${location.search}&limit=${window.topicLimit}&offset=${window.topicOffset}`)).json()
+
+        renderPosts(topics, document.querySelector("#posts_container"))
+        document.querySelector("#loading-posts").hidden = true
+        if (!topics || topics.length < window.topicLimit) {
+            if (window.topicOffset == 0 && topics.length == 0) {
+                document.querySelector("#nothing-found").hidden = false
+            }
+            return
+        }
+        window.topicOffset += window.topicLimit
+        document.querySelector("#load-more-button").style.display = "block"
+    }
+    fetchMoreTopics()
+
+    document.querySelector("#load-more-button").addEventListener("click", fetchMoreTopics)
+
+    function renderPosts(posts, container) {
+
+        for (const topic of posts) {
+            const basePost = `<div class="post">
+            <div class="post-top">
+                <a class="id" target="_blank"></a>
+                <a class="topic" target="_blank"></a>
+                <a class="scratch" target="_blank">View on Scratch</a>
+            </div>
+            </div>`
+            console.log(basePost.replaceAll(/\n[ ]+/g, ""));
+            const newEl = htmlToNode(basePost.replaceAll(/\n[ ]+/g, ""));
+            newEl.querySelector(".id").innerText = "#" + topic.id
+            newEl.querySelector(".id").href = "https://scratch.mit.edu/discuss/topic/" + topic.id
+            newEl.querySelector(".scratch").href = "https://scratch.mit.edu/discuss/topic/" + topic.id
+            newEl.querySelector(".topic").innerText = topic.name
+            newEl.querySelector(".topic").href = "/t/" + topic.id
+            container.appendChild(newEl)
+        }
+        // <a class="subforum" target="_blank"></a>
+        // <span class="topic-subforum-divider">&raquo;</span>
+
+
+    }
+</script>
+
+</html>

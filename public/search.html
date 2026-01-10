@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search the Forums - ScratchPost</title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+
+<body>
+    <nav class="nav">
+        <a href="/">ScratchPost</a>
+        <a href="/search">Search</a>
+        <a href="/leaderboards">Forum Leaderboards</a>
+        <a href="/view">View a User</a>
+    </nav>
+    <div class="page">
+        <h2>Search the Forums</h2>
+        <hr>
+        <h3>Search Posts</h3>
+        <form action="/search/posts">
+            <label>Search Query: </label><input name="q" placeholder="Search query...">
+            <input type="submit" value="🔍 Search"><br>
+            <br>
+            <details>
+                <summary>Options</summary>
+                <label>Filter to posts by a user: </label><input name="author" placeholder="griffpatch"><br>
+                <label>Filter to posts on a topic: </label><input name="topic" placeholder="123456"><br>
+                <label>Filter to posts in a category: </label><input name="category" placeholder="Suggestions"><br>
+
+                <label>Mode: </label>
+                <select name="mode">
+                    <option value="relevance">Relevance</option>
+                    <option value="popularity">Popularity</option>
+                    <option value="sort">Sort (use sort mode)</option>
+                </select><br>
+                <label>Sort by: </label>
+                <select name="sort">
+                    <option value="oldest">Oldest</option>
+                    <option value="newest">Newest</option>
+                </select>
+            </details>
+        </form>
+        <h3>Search Topics</h3>
+        <form action="/search/topics">
+            <label>Search Query: </label><input name="q" placeholder="Search query...">
+            <input type="submit" value="🔍 Search"><br>
+            <br>
+            <details>
+                <summary>Options</summary>
+                <label>Sort by: </label>
+                <select name="sort">
+                    <option value="oldest">Oldest</option>
+                    <option value="newest">Newest</option>
+                </select>
+            </details>
+        </form>
+    </div>
+    <script type="module" src="/js/forms.js"></script>
+</body>
+
+</html>

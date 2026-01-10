@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/main.css">
     <title>ScratchPost - Scratch Forums Viewer</title>
     <style>
         body {
@@ -19,8 +20,14 @@
 </head>
 
 <body>
-    <h2>ScratchPost</h2>
-    <p>ScratchPost is a Scratch forums viewer and API.</p>
+    <nav class="nav">
+        <a href="/">ScratchPost</a>
+        <a href="/search">Search</a>
+        <a href="/leaderboards">Forum Leaderboards</a>
+        <a href="/view">View a User</a>
+    </nav>
+    <h2 style="text-align: center;">ScratchPost</h2>
+    <!-- <p>ScratchPost is a Scratch forums viewer and API.</p>
     <form action="/topic/" onsubmit="location.href = this.action + this.topic.value; return false;"><label>View a topic:
         </label><input name="topic" placeholder="topic id"></form>
     <form action="/post/" onsubmit="location.href = this.action + this.post.value; return false;"><label>View a post:
@@ -34,7 +41,11 @@
     <code>/api/user/{username}</code><label> - Returns data about a user</label><br>
     <code>/api/user/{username}/count</code><label> - Returns a user's post count</label><br>
     <code>/api/user/{username}/posts</code><label> - Returns a user's posts, in csv format</label><br>
-    <code>/api/user/{username}/first</code><label> - Returns a user's first post, in csv format</label><br>
+    <code>/api/user/{username}/first</code><label> - Returns a user's first post, in csv format</label><br> -->
+    <div style="width: fit-content;margin: 0 auto;">
+    <a href="/search"><button style="padding: 20px;font-size: large;">🔍 Search Forums</button></a>
+    <a href="/view"><button style="padding: 20px;font-size: large;">📊 View User</button></a>
+    </div>
 </body>
 
 </html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find User - ScratchPost</title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+
+<body>
+    <nav class="nav">
+        <a href="/">ScratchPost</a>
+        <a href="/search">Search</a>
+        <a href="/leaderboards">Forum Leaderboards</a>
+        <a href="/view">View a User</a>
+    </nav>
+
+    <div class="page" style="font-size: large;">
+        <h3 style="text-align: center;">View a users's posts</h3>
+        <form onsubmit="handle(event)" style="text-align: center;margin-top: 0px;">
+            <label for="username">Enter a username: </label><input id="username" placeholder="Enter a username...">
+            <br>
+            <input type="submit" value="Go" style="margin-top: 10px;padding: 7px 12px;" class="coolbtn">
+        </form>
+        <script>
+            function handle(e) {
+                e.preventDefault()
+                location.href = `/users/${document.querySelector("#username").value}`
+            }
+        </script>
+    </div>
+</body>
+
+</html>

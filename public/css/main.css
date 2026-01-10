@@ -1,0 +1,98 @@
+.img-load-wrapper {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    background-color: rgb(211, 211, 211);
+    z-index: 99999;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.activity {
+    position: absolute;
+    left: -45%;
+    height: 100%;
+    width: 45%;
+    background-image: linear-gradient(to left, rgba(251, 251, 251, 0.05), rgba(251, 251, 251, 0.3), rgba(251, 251, 251, 0.6), rgba(251, 251, 251, 0.3), rgba(251, 251, 251, 0.05));
+    background-image: -moz-linear-gradient(to left, rgba(251, 251, 251, 0.05), rgba(251, 251, 251, 0.3), rgba(251, 251, 251, 0.6), rgba(251, 251, 251, 0.3), rgba(251, 251, 251, 0.05));
+    background-image: -webkit-linear-gradient(to left, rgba(251, 251, 251, 0.05), rgba(251, 251, 251, 0.3), rgba(251, 251, 251, 0.6), rgba(251, 251, 251, 0.3), rgba(251, 251, 251, 0.05));
+    animation: loading 1s infinite;
+    z-index: 100000;
+}
+
+body {
+    font-family: Tahoma, Arial, sans-serif;
+    margin: 0;
+}
+
+@keyframes loading {
+    0% {
+        left: -45%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+#load-more-button {
+    margin: 0 auto;
+    padding: 10px;
+    background-color: #1992fc;
+    transition: 0.25s;
+    border-radius: 10px;
+    color: white;
+    display: none;
+    border: 2px solid #1671c1;
+}
+
+#load-more-button:hover,
+.coolbtn:hover {
+    background-color: #1671c1;
+    transition: 0.25s;
+}
+
+.coolbtn {
+    padding: 10px;
+    background-color: #1992fc;
+    transition: 0.25s;
+    border-radius: 10px;
+    color: white;
+    border: 2px solid #1671c1;
+}
+
+.nav {
+    height: 40px;
+    background-color: #5b8edd;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav a:nth-child(1) {
+    margin-left: 20px;
+    margin-right: 10px;
+    color: gold;
+    font-size: larger;
+}
+
+.nav * {
+    color: white;
+    text-decoration: none;
+}
+
+.nav *:hover {
+    text-decoration: underline;
+}
+
+.page {
+    margin: 10px;
+}
+
+.cf {
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.ct {
+    text-align: center;
+}

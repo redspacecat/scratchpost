@@ -197,7 +197,7 @@
                 document.querySelector("#prev").hidden = true
             }
             console.log(page)
-            let data = (await (await fetch(`/api/leaderboard${category ? "?category=" + category : ""}${(category ? "&" : "?") + "offset=" + (page - 1) * 1000}`)).json())
+            let data = (await (await fetch(`https://api.scratchpost.quuq.dev/leaderboard${category ? "?category=" + category : ""}${(category ? "&" : "?") + "offset=" + (page - 1) * 1000}`)).json())
             // for ([i, d] of data.entries()) {
             //     // data[i] = JSON.parse(d)
             //     const item = d.split(",")
@@ -254,7 +254,7 @@
             await createChart("#topYear", lastYear)
             async function createChart(container, timeFrame) {
 
-                let data2 = (await (await fetch(`/api/leaderboard?limit=20${timeFrame ? "&time=" + timeFrame : ""}${category ? "&category=" + category : ""}`)).json())
+                let data2 = (await (await fetch(`https://api.scratchpost.quuq.dev/leaderboard?limit=20${timeFrame ? "&time=" + timeFrame : ""}${category ? "&category=" + category : ""}`)).json())
                 console.log(data2)
                 const ctx = document.querySelector(container)
                 document.querySelector(`${container}-loader`).style.display = "none"

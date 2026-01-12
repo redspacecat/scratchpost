@@ -68,7 +68,7 @@
     async function fetchMoreTopics() {
         document.querySelector("#loading-posts").hidden = false
         document.querySelector("#load-more-button").style.display = "none"
-        const topics = await (await fetch(`/api/search/topics${location.search}&limit=${window.topicLimit}&offset=${window.topicOffset}`)).json()
+        const topics = await (await fetch(`https://api.scratchpost.quuq.dev/search/topics${location.search}&limit=${window.topicLimit}&offset=${window.topicOffset}`)).json()
 
         renderPosts(topics, document.querySelector("#posts_container"))
         document.querySelector("#loading-posts").hidden = true

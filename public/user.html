@@ -118,7 +118,7 @@
             if (!username) {
                 location.href = "/"
             }
-            let twData = (await (await fetch(`https://trampoline.turbowarp.org/api/users/${username}`)).json())
+            let twData = (await (await fetch(`https://trampoline.turbowarp.orghttps://api.scratchpost.quuq.dev/users/${username}`)).json())
             username = twData.username
             const userID = twData.id
             console.log(username)
@@ -138,7 +138,7 @@
             }
 
             // await new Promise(r => setTimeout(r, 99999999));
-            let response = (await (await fetch(`/api/search/posts?author=${username}&detail=1&limit=none&sort=oldest&displayAuthor=false`)).json())
+            let response = (await (await fetch(`https://api.scratchpost.quuq.dev/search/posts?author=${username}&detail=1&limit=none&sort=oldest&displayAuthor=false`)).json())
             if (response.length == 0) {
                 console.log("No posts")
                 document.querySelector("#replace").innerHTML = `${username} has not posted`
@@ -468,7 +468,7 @@
             async function fetchMorePosts() {
                 document.querySelector("#loading-posts").hidden = false
                 document.querySelector("#load-more-button").style.display = "none"
-                const posts = await (await fetch(`/api/search/posts?author=${username}&detail=3&sort=newest&displayAuthor=false&limit=${postLimit}&offset=${window.postOffset}`)).json()
+                const posts = await (await fetch(`https://api.scratchpost.quuq.dev/search/posts?author=${username}&detail=3&sort=newest&displayAuthor=false&limit=${postLimit}&offset=${window.postOffset}`)).json()
 
                 window.postOffset += window.postLimit
                 renderPosts(posts, document.querySelector("#posts_container"))

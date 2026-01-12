@@ -20,7 +20,7 @@ function handlePostCounts(data) {
     const username = location.pathname.split("/").at(-1);
     const mode = location.pathname.startsWith("/post") ? "post" : location.pathname.startsWith("/topic") ? "topic" : "user";
     const page = new URLSearchParams(location.search).get("page") ?? 1;
-    let [postCounts, response] = await Promise.all([await fetch("https://raw.githubusercontent.com/redspacecat/scratch-forums-data/main/post_counts.txt"), await fetch(mode == "post" ? `/api/post/${post}` : mode == "user" ? `/api/user/${username}` : `/api/topic/${topic}?page=${page}`)]);
+    let [postCounts, response] = await Promise.all([await fetch("https://raw.githubusercontent.com/redspacecat/scratch-forums-data/main/post_counts.txt"), await fetch(mode == "post" ? `https://api.scratchpost.quuq.dev/post/${post}` : mode == "user" ? `https://api.scratchpost.quuq.dev/user/${username}` : `https://api.scratchpost.quuq.dev/topic/${topic}?page=${page}`)]);
     postCounts = await postCounts.text();
     postCounts = handlePostCounts(postCounts.split("\n"));
     console.log(postCounts);

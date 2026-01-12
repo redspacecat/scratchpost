@@ -123,6 +123,12 @@
         </div>
         <div style="display: flex;gap: 30px;">
             <div style="min-width: 400px;">
+                <div class="cf">
+                    <form onsubmit="findUser(event)">
+                        <input type="text" style="width: 250px" placeholder="🔍 Find a user" id="usersearch">
+                        <input type="submit" value="Go">
+                    </form>
+                </div>
                 <div style="margin-top: 5px;" class="cf">
                     <a id="prev">&lt; Previous Page</a>
                     <input type="number" placeholder="Page #" id="gopage">
@@ -169,6 +175,13 @@
         // const category = params.get("category") || null
         // const 
 
+        function findUser(e) {
+            e.preventDefault()
+            const toSearch = document.querySelector("#usersearch").value
+            console.log(toSearch)
+            location.href = `/find.html?username=${toSearch}&category=${window.category}`
+        }
+
         function changeCategory() {
             let target = document.querySelector("#categorySwitcher").value
             location.search = `?category=${categories[target]}`
@@ -208,21 +221,29 @@
             //     document.querySelector("#next").hidden = true
             // }
 
+            document.querySelector("#gopage").addEventListener("keyup", ({ key }) => {
+                if (key === "Enter") {
+                    if (!isNaN(document.querySelector("#gopage").value))
+                        location.search = "?page=" + document.querySelector("#gopage").value + "&category=" + category
+                }
+            })
+
             console.log(data)
             window.data = data
             container = document.querySelector("#list")
             container2 = document.querySelector("#table")
             let max = data[0].count
-            let i2 = 0
+            let i2 = (page - 1) * 100
             // if (page == 1) {
             //     i2 = 0
             // } else {
             //     i2 = (page - 1) * 1000
             // }
-            let base = i2
+            let base = 0
             let mode = 0
             for (let [i, item] of data.entries()) {
                 user = data[i + base]
+                // console.log(user, i, data, data[i])
                 /*if (mode == 0) {
                     if (i2 > -1) {
                         mode = 1
@@ -232,15 +253,26 @@
                     container.appendChild(newEl)
                     if (i2 > -1) mode = 1
                 } else {*/
-                newEl = htmlToNode(`<tr id="${i2 - base}"><td>#${i2 + 1} <a class="forum-user-link" target="_blank" href="/users/${user.username}">${user.username}</td><td style="width: 60px;text-align: center;">${user.count}</td></tr>`)
+                newEl = htmlToNode(`<tr id="${i}"><td>#${i2 + 1} <a class="forum-user-link" target="_blank" href="/users/${user.username}">${user.username}</td><td style="width: 60px;text-align: center;">${user.count}</td></tr>`)
                 container2.appendChild(newEl)
-                if (i2 > 1000 + base - 2) break
+                // if (i2 > 100 + base - 2) break
                 i2++
                 if (i2 == data.length) break
             }
 
             document.querySelector("#table").hidden = false
             document.querySelector(".loader3").style.display = "none"
+
+            if (searchParams.has("item")) {
+                const el = document.getElementById((parseInt(searchParams.get("item")) - 1).toString())
+                el.scrollIntoView({
+                    behavior: 'auto',
+                    block: 'center',
+                    inline: 'center',
+                    behavior: "smooth"
+                });
+                el.style.backgroundColor = "lightyellow"
+            }
 
             const msDay = 86400000
             const lastWeek = new Date(Date.now() - (7 * msDay)).toISOString().substring(0, 10);

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Searching... - SearchPost</title>
+    <style>
+        body {
+            font-family: Tahoma, Arial, sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Searching...</h2>
+    <script>
+        (async function () {
+            const username = new URLSearchParams(location.search).get("username")
+            const category = new URLSearchParams(location.search).get("category")
+            let index = (await (await fetch(`https://api.scratchpost.quuq.dev/users/${username}/ranking${category ? "?category=" + category : ""}`)).json()).rank
+            if (!index) {
+                location.href = "/leaderboards"
+                return
+            } else {
+                index = parseInt(index)
+            }
+            const page = Math.floor(index / 100)
+            const piece = index % 100
+            location.href = `/leaderboards?page=${page + 1}&item=${piece}${category ? "&category=" + category : ""}`
+        })()
+    </script>
+</body>
+
+</html>

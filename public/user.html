@@ -118,7 +118,7 @@
             if (!username) {
                 location.href = "/"
             }
-            let twData = (await (await fetch(`https://trampoline.turbowarp.orghttps://api.scratchpost.quuq.dev/users/${username}`)).json())
+            let twData = (await (await fetch(`https://trampoline.turbowarp.org/api/users/${username}`)).json())
             username = twData.username
             const userID = twData.id
             console.log(username)

@@ -66,63 +66,63 @@
     </nav>
     <div class="page" style="margin: 30px;">
         <h2 style="text-align: center;">Scratch Forum Leaderboards</h2>
+        <div style="margin: 10px auto;font-size: large;" class="cf">
+            <span>Forum Category: </span>
+            <select id="categorySwitcher" onchange="changeCategory()">
+                <option value="All">All</option>
+                <optgroup label="Welcome to Scratch"> <!-- list from postpercent -->
+                    <option value="Announcements">Announcements</option>
+                    <option value="New Scratchers">New Scratchers</option>
+                </optgroup>
+                <optgroup label="Making Scratch Projects">
+                    <option value="Help With Scripts">Help With Scripts</option>
+                    <option value="Show and Tell">Show and Tell</option>
+                    <option value="Project Ideas">Project Ideas</option>
+                    <option value="Collaboration">Collaboration</option>
+                    <option value="Requests">Requests</option>
+                    <option value="Project Save & Level Codes">Project Save & Level Codes</option>
+                </optgroup>
+                <optgroup label="About Scratch">
+                    <option value="Questions about Scratch">Questions about Scratch</option>
+                    <option value="Suggestions">Suggestions</option>
+                    <option value="Bugs and Glitches">Bugs and Glitches</option>
+                    <option value="Advanced Topics">Advanced Topics</option>
+                    <option value="Connecting to the Physical World">Connecting to the Physical World</option>
+                    <option value="Developing Scratch Extensions">Developing Scratch Extensions</option>
+                    <option value="Open Source Projects">Open Source Projects</option>
+                </optgroup>
+                <optgroup label="Interests Beyond Scratch">
+                    <option value="Things I'm Making and Creating">Things I'm Making and Creating</option>
+                    <option value="Things I'm Reading and Playing">Things I'm Reading and Playing</option>
+                </optgroup>
+                <optgroup label="Scratch Around the World">
+                    <option value="Africa">Africa</option>
+                    <option value="Bahasa Indonesia">Bahasa Indonesia</option>
+                    <option value="Català">Català</option>
+                    <option value="Deutsch">Deutsch</option>
+                    <option value="Ελληνικά">Ελληνικά</option>
+                    <option value="Español">Español</option>
+                    <option value="فارسی">فارسی</option>
+                    <option value="Français">Français</option>
+                    <option value="עברית">עברית</option>
+                    <option value="हिन्दी">हिन्दी</option>
+                    <option value="한국어">한국어</option>
+                    <option value="Italiano">Italiano</option>
+                    <option value="Nederlands">Nederlands</option>
+                    <option value="日本語">日本語</option>
+                    <option value="Norsk">Norsk</option>
+                    <option value="Polski">Polski</option>
+                    <option value="Português">Português</option>
+                    <option value="Pусский">Pусский</option>
+                    <option value="Türkçe">Türkçe</option>
+                    <option value="中文">中文</option>
+                    <option value="Other Languages">Other Languages</option>
+                    <option value="Translating Scratch">Translating Scratch</option>
+                </optgroup>
+            </select>
+        </div>
         <div style="display: flex;gap: 30px;">
             <div style="min-width: 400px;">
-                <div style="margin-top: 5px;" class="cf">
-                    <span>Category: </span>
-                    <select id="categorySwitcher" onchange="changeCategory()">
-                        <option value="All">All</option>
-                        <optgroup label="Welcome to Scratch"> <!-- list from postpercent -->
-                            <option value="Announcements">Announcements</option>
-                            <option value="New Scratchers">New Scratchers</option>
-                        </optgroup>
-                        <optgroup label="Making Scratch Projects">
-                            <option value="Help With Scripts">Help With Scripts</option>
-                            <option value="Show and Tell">Show and Tell</option>
-                            <option value="Project Ideas">Project Ideas</option>
-                            <option value="Collaboration">Collaboration</option>
-                            <option value="Requests">Requests</option>
-                        </optgroup>
-                        <optgroup label="About Scratch">
-                            <option value="Questions about Scratch">Questions about Scratch</option>
-                            <option value="Suggestions">Suggestions</option>
-                            <option value="Bugs and Glitches">Bugs and Glitches</option>
-                            <option value="Advanced Topics">Advanced Topics</option>
-                            <option value="Connecting to the Physical World">Connecting to the Physical World</option>
-                            <option value="Developing Scratch Extensions">Developing Scratch Extensions</option>
-                            <option value="Open Source Projects">Open Source Projects</option>
-                        </optgroup>
-                        <optgroup label="Interests Beyond Scratch">
-                            <option value="Things I'm Making and Creating">Things I'm Making and Creating</option>
-                            <option value="Things I'm Reading and Playing">Things I'm Reading and Playing</option>
-                        </optgroup>
-                        <optgroup label="Scratch Around the World">
-                            <option value="Africa">Africa</option>
-                            <option value="Bahasa Indonesia">Bahasa Indonesia</option>
-                            <option value="Català">Català</option>
-                            <option value="Deutsch">Deutsch</option>
-                            <option value="Ελληνικά">Ελληνικά</option>
-                            <option value="Español">Español</option>
-                            <option value="فارسی">فارسی</option>
-                            <option value="Français">Français</option>
-                            <option value="עברית">עברית</option>
-                            <option value="हिन्दी">हिन्दी</option>
-                            <option value="한국어">한국어</option>
-                            <option value="Italiano">Italiano</option>
-                            <option value="Nederlands">Nederlands</option>
-                            <option value="日本語">日本語</option>
-                            <option value="Norsk">Norsk</option>
-                            <option value="Polski">Polski</option>
-                            <option value="Português">Português</option>
-                            <option value="Pусский">Pусский</option>
-                            <option value="Türkçe">Türkçe</option>
-                            <option value="中文">中文</option>
-                            <option value="Other Languages">Other Languages</option>
-                            <option value="Translating Scratch">Translating Scratch</option>
-                        </optgroup>
-                    </select>
-                </div>
-
                 <div style="margin-top: 5px;" class="cf">
                     <a id="prev">&lt; Previous Page</a>
                     <input type="number" placeholder="Page #" id="gopage">
@@ -197,7 +197,7 @@
                 document.querySelector("#prev").hidden = true
             }
             console.log(page)
-            let data = (await (await fetch(`https://api.scratchpost.quuq.dev/leaderboard${category ? "?category=" + category : ""}${(category ? "&" : "?") + "offset=" + (page - 1) * 1000}`)).json())
+            let data = (await (await fetch(`https://api.scratchpost.quuq.dev/leaderboard?limit=100${category ? "&category=" + category : ""}${"&offset=" + (page - 1) * 100}`)).json())
             // for ([i, d] of data.entries()) {
             //     // data[i] = JSON.parse(d)
             //     const item = d.split(",")
@@ -242,9 +242,10 @@
             document.querySelector("#table").hidden = false
             document.querySelector(".loader3").style.display = "none"
 
-            const lastWeek = new Date(Date.now() - (7 * 24 * 60 * 60 * 1000)).toISOString().substring(0, 10);
-            const lastMonth = new Date(Date.now() - (31 * 24 * 60 * 60 * 1000)).toISOString().substring(0, 10);
-            const lastYear = new Date(Date.now() - (365 * 24 * 60 * 60 * 1000)).toISOString().substring(0, 10);
+            const msDay = 86400000
+            const lastWeek = new Date(Date.now() - (7 * msDay)).toISOString().substring(0, 10);
+            const lastMonth = new Date(Date.now() - (31 * msDay)).toISOString().substring(0, 10);
+            const lastYear = new Date(Date.now() - (365 * msDay)).toISOString().substring(0, 10);
             const allTime = null;
             console.log(lastWeek, lastMonth, lastYear)
 

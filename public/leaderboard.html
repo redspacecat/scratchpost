@@ -34,6 +34,7 @@
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
     <style>
         #table {
@@ -167,6 +168,16 @@
                     <div class="loader3"></div>
                 </div>
                 <canvas id="topYear"></canvas>
+                <h3 class="cf">Posts/Month Over Time</h3>
+                <div class="cf" id="amountOverTime-loader">
+                    <div class="loader3"></div>
+                </div>
+                <canvas id="amountOverTime"></canvas>
+                <h3 class="cf">Total Post Count Over Time</h3>
+                <div class="cf" id="countOverTime-loader">
+                    <div class="loader3"></div>
+                </div>
+                <canvas id="countOverTime"></canvas>
             </div>
         </div>
     </div>
@@ -303,7 +314,11 @@
                     ]
                 };
 
-                var myBar = new Chart(ctx, {
+                var myBar = doChart(ctx, chartData)
+            }
+
+            function doChart(ctx, chartData) {
+                return new Chart(ctx, {
                     type: "bar",
                     data: chartData,
                     options: {
@@ -324,6 +339,107 @@
                     }
                 })
             }
+            var container = "#amountOverTime"
+            const ctx2 = document.querySelector(container)
+            var data2 = await (await fetch(`https://api.scratchpost.quuq.dev/stats/posts/time${category ? "?category=" + category : ""}`)).json()
+            document.querySelector(`${container}-loader`).style.display = "none"
+            data2.pop()
+            var chartData = {
+                labels: data2.map(el => new Date(el.time)),
+                datasets: [
+                    {
+                        label: 'Posts per month',
+                        data: data2.map(el => el.count),
+                        backgroundColor: "green",
+                        pointRadius: 2,
+                        pointHoverRadius: 3,
+                        borderColor: "lightgreen",
+                        lineTension: 0.5
+                    }
+                ]
+            };
+
+            new Chart(ctx2, {
+                type: "line",
+                data: chartData,
+                options: {
+                    plugins: {
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                        },
+                        legend: {
+                            display: false
+                        },
+                        hover: {
+                            mode: 'index',
+                            intersect: false
+                        },
+                        responsive: true
+                    },
+                    scales: {
+                        x: {
+                            type: 'time',
+                            min: new Date(data2[0]),
+                            time: {
+                                unit: "month",
+                                tooltipFormat: 'MMM yyyy',
+                            }
+                        }
+                    }
+                }
+            })
+
+            var container = "#countOverTime"
+            const ctx3 = document.querySelector(container)
+            var data2 = await (await fetch(`https://api.scratchpost.quuq.dev/stats/posts/all`)).json()
+            document.querySelector(`${container}-loader`).style.display = "none"
+            var chartData = {
+                labels: data2.map(el => new Date(el.time)),
+                datasets: [
+                    {
+                        label: 'Posts per month',
+                        data: data2.map(el => el.count),
+                        backgroundColor: "green",
+                        pointRadius: 2,
+                        pointHoverRadius: 3,
+                        borderColor: "lightgreen",
+                        lineTension: 0.5
+                    }
+                ]
+            };
+
+            new Chart(ctx3, {
+                type: "line",
+                data: chartData,
+                options: {
+                    plugins: {
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                        },
+                        legend: {
+                            display: false
+                        },
+                        hover: {
+                            mode: 'index',
+                            intersect: false
+                        },
+                        responsive: true
+                    },
+                    scales: {
+                        x: {
+                            type: 'time',
+                            min: new Date(data2[0]),
+                            time: {
+                                unit: "month",
+                                tooltipFormat: 'MMM yyyy',
+                            }
+                        }
+                    }
+                }
+            })
+
         })()
 
     </script>

@@ -36,6 +36,7 @@ body {
 
 #load-more-button {
     margin: 0 auto;
+    margin-bottom: 10px;
     padding: 10px;
     background-color: #1992fc;
     transition: 0.25s;
@@ -95,4 +96,9 @@ body {
 
 .ct {
     text-align: center;
+}
+
+#changelog-link {
+    margin-left: auto;
+    margin-right: 20px;
 }

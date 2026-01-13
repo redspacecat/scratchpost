@@ -30,6 +30,10 @@
             "destination": "/leaderboard.html"
         },
         {
+            "source": "/changelog",
+            "destination": "/changelog.html"
+        },
+        {
             "source": "/(.*)",
             "destination": "/api"
         }

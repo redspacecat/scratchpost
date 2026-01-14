@@ -99,6 +99,9 @@ body {
 }
 
 #changelog-link {
-    margin-left: auto;
     margin-right: 20px;
+}
+
+#feedback-link {
+    margin-left: auto;
 }

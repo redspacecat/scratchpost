@@ -100,7 +100,7 @@
     function renderPosts(posts, container) {
 
         for (const post of posts) {
-            const basePost = `<div class="post">
+            const basePost = `<div class="post" data-new="true">
             <div class="post-top">
                 <a class="date" target="_blank"></a>
                 <a class="subforum" target="_blank"></a>
@@ -136,11 +136,13 @@
             container.appendChild(newEl);
         }
 
-        scratchblocks.renderMatching(".blocks", {
+        scratchblocks.renderMatching('.post[data-new="true"] .blocks', {
             scale: 0.675,
             languages: ["en", "de", "es", "fr", "zh_cn", "pl", "ja", "nl", "pt", "it", "he", "ko", "nb", "tr", "el", "ru", "ca", "id"],
             style: "scratch3",
         });
+
+        document.querySelectorAll('.post').forEach(el => el.dataset.new = "false")
     }
 </script>
 

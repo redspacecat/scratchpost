@@ -1,5 +1,4 @@
 const path = require("path");
-const api = require("./api.js");
 const fs = require("fs");
 
 const file404 = fs.readFileSync(path.join(__dirname, "../public", "404.html"))

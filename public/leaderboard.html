@@ -193,7 +193,7 @@
             e.preventDefault()
             const toSearch = document.querySelector("#usersearch").value
             console.log(toSearch)
-            location.href = `/find.html?username=${toSearch}&category=${window.category}`
+            location.href = `/find?username=${toSearch}&category=${window.category}`
         }
 
         function changeCategory() {

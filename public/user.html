@@ -206,7 +206,7 @@
                 const newEl = htmlToNode(`<div style="margin: 5px;margin-bottom: 12px;">Rank <b></b> <a target="_blank"></a></div>`)
                 newEl.querySelector("b").innerText = "#" + ranking
                 newEl.querySelector("a").innerText = "globally"
-                newEl.querySelector("a").href = `/find.html?username=${username}`
+                newEl.querySelector("a").href = `/find?username=${username}`
                 document.querySelector("#stats-stuff").appendChild(newEl)
                 document.querySelector("#stats-loading").hidden = false
                 document.querySelector("#stats .loader3").style.display = "none"
@@ -216,7 +216,7 @@
                     const newEl = htmlToNode(`<div style="margin: 5px">Rank <b></b> in <a target="_blank"></a></div>`)
                     newEl.querySelector("b").innerText = "#" + ranking
                     newEl.querySelector("a").innerText = data[i][0]
-                    newEl.querySelector("a").href = `/find.html?username=${username}&category=${categoriesInverted[data[i][0]]}`
+                    newEl.querySelector("a").href = `/find?username=${username}&category=${categoriesInverted[data[i][0]]}`
                     document.querySelector("#stats-stuff").appendChild(newEl)
                 }
 

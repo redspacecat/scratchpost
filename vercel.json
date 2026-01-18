@@ -34,6 +34,10 @@
             "destination": "/changelog.html"
         },
         {
+            "source": "/find",
+            "destination": "/find.html"
+        },
+        {
             "source": "/(.*)",
             "destination": "/api"
         }

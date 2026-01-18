@@ -25,9 +25,11 @@
             } else {
                 index = parseInt(index)
             }
-            const page = Math.floor(index / 100)
-            const piece = index % 100
-            location.href = `/leaderboards?page=${page + 1}&item=${piece}${category ? "&category=" + category : ""}`
+            // const page = Math.floor(index / 100)
+            // const piece = index % 100
+            const page = Math.floor(((index - 1) / 100) + 1)
+            const piece = ((index - 1) % 100) + 1
+            location.href = `/leaderboards?page=${page}&item=${piece}${category ? "&category=" + category : ""}`
         })()
     </script>
 </body>

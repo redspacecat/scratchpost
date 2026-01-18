@@ -279,13 +279,13 @@
 
             // Sort the array based on the second element
             items.sort(function (first, second) {
-                console.log(second, first)
+                // console.log(second, first)
                 return second[1] - first[1];
             });
 
             categoryPostData = items
 
-            console.log(categoryPostData)
+            // console.log(categoryPostData)
             getRankings(categoryPostData)
 
             const categoryEl = document.getElementById("categories")
@@ -299,28 +299,115 @@
             const dataEl = document.querySelector("#data")
             document.querySelector("#replace").innerHTML = `${username} has ${postCount} posts`
 
+            // const postCountsOverTime = []
+            // const allPostCounts = []
+            // let accumulatedCount = 0
+            // let timeSinceLast = null
+            // let ppm = 0
+            // for (const post of response) {
+            //     const data = post
+            //     // console.log(data)
+            //     const date = new Date(data.date).getTime()
+            //     const id = data.id
+            //     accumulatedCount += 1
+            //     if ((date - timeSinceLast > 86400000 * 30) || response.at(-1) == post) {
+            //         // console.log("skipping")
+            //         timeSinceLast = date
+            //         postCountsOverTime.push({ date: date, count: accumulatedCount, ppm: ppm })
+            //         allPostCounts.push({ date: date, id: id })
+            //         ppm = 0
+            //     } else {
+            //         ppm += 1
+            //         allPostCounts.push({ date: date, id: id })
+            //     }
+            // }
+
             const postCountsOverTime = []
             const allPostCounts = []
             let accumulatedCount = 0
             let timeSinceLast = null
             let ppm = 0
-            for (const post of response) {
-                const data = post
-                // console.log(data)
-                const date = new Date(data.date).getTime()
-                const id = data.id
-                accumulatedCount += 1
-                if ((date - timeSinceLast > 86400000 * 30) || response.at(-1) == post) {
-                    // console.log("skipping")
-                    timeSinceLast = date
-                    postCountsOverTime.push({ date: date, count: accumulatedCount, ppm: ppm })
-                    allPostCounts.push({ date: date, id: id })
-                    ppm = 0
-                } else {
-                    ppm += 1
+            const oneMonth = 86400000 * 30.5
+
+            let startDate = new Date(response[0].date)
+            startDate.setDate(1);
+            startDate.setHours(0, 0, 0, 0);
+            startDate = startDate.getTime()
+
+            let endDate = new Date(response.at(-1).date).getTime()
+            let nd = new Date(endDate)
+            const currentMonth = nd.getMonth();
+            nd.setMonth(currentMonth + 1);
+            endDate = nd.getTime()
+
+            let previousDate = startDate
+
+            let targetDate = previousDate + oneMonth
+            targetDate = new Date(targetDate)
+            targetDate.setDate(1);
+            targetDate.setHours(0, 0, 0, 0);
+            targetDate = targetDate.getTime()
+
+            let testDate = previousDate
+
+            let i = 0
+
+            // console.log(targetDate, endDate)
+            while (targetDate < endDate) {
+                // console.log(targetDate, endDate)
+                ppm = 0
+                while (testDate < targetDate) {
+                    const post = response[i]
+                    if (!post) {
+                        targetDate = new Date(response[i - 1].date).getTime()
+                        // console.log(new Date(targetDate))
+                        // console.log(i, "exiting")
+                        break
+                    }
+                    const date = post.date
+                    const id = post.id
+                    testDate = new Date(post.date).getTime()
+
+                    accumulatedCount++
+                    i++
+                    ppm++
+                    // console.log("new post", i, ppm)
                     allPostCounts.push({ date: date, id: id })
                 }
+                postCountsOverTime.push({ date: targetDate, count: accumulatedCount, ppm: ppm })
+                // allPostCounts.push({ date: date, id: id })
+                // targetDate += oneMonth
+                // let targetDate2 = new Date(targetDate)
+                // targetDate2.setDate(1);
+                // targetDate2.setHours(0, 0, 0, 0);
+                // console.log(new Date(targetDate), targetDate2)
+                // targetDate = targetDate2.getTime()
+                // testDate = targetDate - 1
+                let nd = new Date(targetDate)
+                const currentMonth = nd.getMonth();
+                nd.setMonth(currentMonth + 1);
+                targetDate = nd.getTime()
+                console.log("new month", new Date(targetDate), ppm, accumulatedCount)
             }
+            console.log(postCountsOverTime, allPostCounts)
+
+            // for (const post of response) {
+            //     const data = post
+            //     // console.log(data)
+            //     const date = new Date(data.date).getTime()
+            //     const id = data.id
+            //     accumulatedCount += 1
+            //     if ((date - timeSinceLast > 86400000 * 30) || response.at(-1) == post) {
+            //         // console.log("skipping")
+            //         timeSinceLast = date
+            //         postCountsOverTime.push({ date: date, count: accumulatedCount, ppm: ppm })
+            //         allPostCounts.push({ date: date, id: id })
+            //         ppm = 0
+            //     } else {
+            //         ppm += 1
+            //         allPostCounts.push({ date: date, id: id })
+            //     }
+            // }
 
             createPostsChart(postCountsOverTime, categoryPostData)
             // console.log(allPostCounts)

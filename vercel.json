@@ -34,6 +34,10 @@
             "destination": "/changelog.html"
         },
         {
+            "source": "/about",
+            "destination": "/about.html"
+        },
+        {
             "source": "/find",
             "destination": "/find.html"
         },
@@ -52,16 +56,16 @@
             "destination": "/search/posts?post=:id"
         },
         {
+            "source": "/u/:id",
+            "destination": "/users/:id"
+        },
+        {
             "source": "/topics/:id",
             "destination": "/search/posts?topic=:id"
         },
         {
             "source": "/posts/:id",
             "destination": "/search/posts?post=:id"
-        },
-        {
-            "source": "/u/:id",
-            "destination": "/users/:id"
         }
     ]
 }

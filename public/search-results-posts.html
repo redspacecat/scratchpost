@@ -70,6 +70,8 @@
     document.querySelector('form [name="author"]').value = params.get("author") || ""
     document.querySelector('form [name="topic"]').value = params.get("topic") || ""
     document.querySelector('form [name="category"]').value = window.invertedCategories[params.get("category")] || ""
+    document.querySelector('form [name="before"]').value = params.get("before")
+    document.querySelector('form [name="after"]').value = params.get("after")
 
     function htmlToNode(htmlString) {
         var div = document.createElement("div");

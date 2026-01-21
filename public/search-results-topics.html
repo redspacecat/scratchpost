@@ -39,8 +39,15 @@
                 <br>
                 <details style="text-align: left;">
                     <summary>Options</summary>
+
+                    <label>Filter to topics by a user: </label><input name="author" placeholder="griffpatch"><br>
+                    <label>Filter to topics in a category: </label><input name="category" placeholder="Suggestions"><br>
+                    <label>Filter to topics before a certain date: </label><input name="before" type="date"><br>
+                    <label>Filter to topics after a certain date: </label><input name="after" type="date"><br>
+
                     <label>Sort by: </label>
                     <select name="sort">
+                        <option value="popularity">Popularity</option>
                         <option value="oldest">Oldest</option>
                         <option value="newest">Newest</option>
                     </select>
@@ -58,7 +65,11 @@
 <script type="module" defer>
     const params = new URLSearchParams(location.search)
     document.querySelector("#query").value = params.get("q")
-    document.querySelector('form [name="sort"]').value = params.get("sort") || "sort"
+    document.querySelector('form [name="before"]').value = params.get("before")
+    document.querySelector('form [name="after"]').value = params.get("after")
+    document.querySelector('form [name="author"]').value = params.get("author")
+    document.querySelector('form [name="category"]').value = params.get("category")
+    document.querySelector('form [name="sort"]').value = params.get("sort") || "oldest"
 
     function htmlToNode(htmlString) {
         var div = document.createElement("div");

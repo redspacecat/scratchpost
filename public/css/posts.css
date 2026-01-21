@@ -57,7 +57,8 @@
 .topic:hover,
 .subforum:hover,
 .scratch:hover,
-.id:hover {
+.id:hover,
+.author-nav:hover {
     text-decoration: underline;
 }
 
@@ -65,7 +66,8 @@
 .topic,
 .subforum,
 .scratch,
-.id {
+.id,
+.author-nav {
     color: white;
     text-decoration: none;
 }

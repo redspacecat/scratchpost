@@ -106,7 +106,10 @@
             const basePost = `<div class="post">
             <div class="post-top">
                 <a class="id"></a>
+                <a class="subforum"></a>
+                <span class="topic-subforum-divider">&raquo;</span>
                 <a class="topic"></a>
+                <a class="author-nav"></a>
                 <a class="scratch" target="_blank">View on Scratch</a>
             </div>
             </div>`
@@ -114,9 +117,13 @@
             const newEl = htmlToNode(basePost.replaceAll(/\n[ ]+/g, ""));
             newEl.querySelector(".id").innerText = "#" + topic.id
             newEl.querySelector(".id").href = "/topics/" + topic.id
+            newEl.querySelector(".subforum").innerText = topic.category_name
+            newEl.querySelector(".subforum").href = "https://scratch.mit.edu/discuss/" + topic.category_id
             newEl.querySelector(".scratch").href = "https://scratch.mit.edu/discuss/topic/" + topic.id
             newEl.querySelector(".topic").innerText = topic.name
             newEl.querySelector(".topic").href = "/topics/" + topic.id
+            newEl.querySelector(".author-nav").innerText = " by " + topic.author
+            newEl.querySelector(".author-nav").href = "/users/" + topic.author
             container.appendChild(newEl)
         }
         // <a class="subforum" target="_blank"></a>

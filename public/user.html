@@ -40,10 +40,23 @@
             }
         }
 
+        #categories-container {
+            width: 100%;
+        }
+
         #categories {
             text-align: center;
             border-collapse: collapse;
-            width: 30%;
+            width: fit-content;
+            margin: 15px auto;
+            max-height: 650px;
+            overflow: scroll;
+            border: 2px solid gray;
+            border-radius: 5px;
+        }
+
+        #categories tr td:nth-child(1) {
+            text-align: left;
         }
 
         #categories td {
@@ -130,20 +143,31 @@
                 </div>
             </div>
             <div style="display: flex;" id="output-data">
-                <table id="categories" hidden>
-                    <thead>
-                        <tr>
-                            <td>Category</td>
-                            <td>Post Count</td>
-                            <td>Percentage</td>
-                        </tr>
-                    </thead>
-                </table>
                 <div style="width: 40%; margin: 15px;max-height: 100vh;">
                     <h3 style="text-align: center;margin: 0;">Posts By Category</h3>
+                    <div style="text-align: center;margin: 5px;">
+                        <button class="coolbtn"
+                            onclick="document.querySelector('#categoryDonut').style.display = 'unset'; document.querySelector('#categories').style.display = 'none';">View
+                            as pie chart</button>
+                        <button class="coolbtn"
+                            onclick="document.querySelector('#categoryDonut').style.display = 'none'; document.querySelector('#categories').style.display = 'block';">View
+                            as table</button>
+                    </div>
+                    <div id="categories-container">
+                        <table id="categories" hidden>
+                            <thead>
+                                <tr>
+                                    <td>Category</td>
+                                    <td>Post Count</td>
+                                    <td>Percentage</td>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
                     <span class="img-load-wrapper"
                         style="width: 100%;display: inline-block;margin-bottom: -4px;height: 70%;border-radius: 50%;margin-top: 20px;"><span
                             class="activity"></span></span>
+
                     <canvas id="categoryDonut" width="90%" height="100%"></canvas>
                 </div>
                 <div style="width: 60%; margin: 15px;">
@@ -293,7 +317,7 @@
 
             for (const [key, value] of Object.entries(categoryPostData)) {
                 // console.log(key, value)
-                categoryEl.appendChild(htmlToNode(`<tr><td>${categories[value[0]]}</td><td>${value[1]}</td><td>${(value[1] / postCount * 100).toFixed(2)}%</td></tr>`))
+                categoryEl.appendChild(htmlToNode(`<tr><td><a class="nolink" href="/search/posts?author=${username}&category=${value[0]}">${categories[value[0]]}</a></td><td><a class="nolink" href="/find?username=${username}&category=${value[0]}">${value[1]}</a></td><td>${(value[1] / postCount * 100).toFixed(2)}%</td></tr>`))
             }
 
             const dataEl = document.querySelector("#data")

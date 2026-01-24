@@ -105,3 +105,13 @@ body {
 #about-link {
     margin-left: auto;
 }
+
+.nolink {
+    text-decoration: none;
+    color: black;
+}
+
+.nolink:hover {
+    text-decoration: none;
+    color: blue;
+}

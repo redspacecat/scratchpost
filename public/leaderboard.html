@@ -302,7 +302,7 @@
             await createChart("#topYear", lastYear)
             async function createChart(container, timeFrame) {
 
-                let data2 = (await (await fetch(`https://api.scratchpost.quuq.dev/leaderboard?limit=20${timeFrame ? "&time=" + timeFrame : ""}${category ? "&category=" + category : ""}`)).json())
+                let data2 = (await (await fetch(`https://api.scratchpost.quuq.dev/leaderboard?limit=20${timeFrame ? "&after=" + timeFrame : ""}${category ? "&category=" + category : ""}`)).json())
                 console.log(data2)
                 const ctx = document.querySelector(container)
                 document.querySelector(`${container}-loader`).style.display = "none"

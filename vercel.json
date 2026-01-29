@@ -26,8 +26,12 @@
             "destination": "/view.html"
         },
         {
-            "source": "/leaderboards",
+            "source": "/leaderboard",
             "destination": "/leaderboard.html"
+        },
+        {
+            "source": "/leaderboard-history",
+            "destination": "/leaderboard-history.html"
         },
         {
             "source": "/changelog",
@@ -47,6 +51,10 @@
         }
     ],
     "redirects": [
+        {
+            "source": "/leaderboards",
+            "destination": "/leaderboard"
+        },
         {
             "source": "/t/:id",
             "destination": "/search/posts?topic=:id"

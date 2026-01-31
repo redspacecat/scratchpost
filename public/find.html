@@ -20,7 +20,7 @@
             const category = new URLSearchParams(location.search).get("category")
             let index = (await (await fetch(`https://api.scratchpost.quuq.dev/users/${username}/ranking${category ? "?category=" + category : ""}`)).json()).rank
             if (!index) {
-                location.href = "/leaderboards"
+                location.href = "/leaderboard"
                 return
             } else {
                 index = parseInt(index)
@@ -29,7 +29,7 @@
             // const piece = index % 100
             const page = Math.floor(((index - 1) / 100) + 1)
             const piece = ((index - 1) % 100) + 1
-            location.href = `/leaderboards?page=${page}&item=${piece}${category ? "&category=" + category : ""}`
+            location.href = `/leaderboard?page=${page}&item=${piece}${category ? "&category=" + category : ""}`
         })()
     </script>
 </body>

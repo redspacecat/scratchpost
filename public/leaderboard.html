@@ -32,6 +32,20 @@
         div:has(> .loader3) {
             margin: 10px auto;
         }
+
+        .chart-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .chart-nav select {
+            padding: 5px;
+            font-size: 14px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0"></script>
@@ -76,7 +90,7 @@
             <span>Forum Category: </span>
             <select id="categorySwitcher" onchange="changeCategory()">
                 <option value="All">All</option>
-                <optgroup label="Welcome to Scratch"> <!-- list from postpercent -->
+                <optgroup label="Welcome to Scratch">
                     <option value="Announcements">Announcements</option>
                     <option value="New Scratchers">New Scratchers</option>
                 </optgroup>
@@ -158,21 +172,34 @@
                     <div class="loader3"></div>
                 </div>
                 <canvas id="topAll"></canvas>
+
                 <h3 class="cf">Top Posters of the Past Week</h3>
+                <div class="chart-nav">
+                    <select id="topWeek-select" onchange="updateChart('topWeek', this.value)"></select>
+                </div>
                 <div class="cf" id="topWeek-loader">
                     <div class="loader3"></div>
                 </div>
                 <canvas id="topWeek"></canvas>
+
                 <h3 class="cf">Top Posters of the Past Month</h3>
+                <div class="chart-nav">
+                    <select id="topMonth-select" onchange="updateChart('topMonth', this.value)"></select>
+                </div>
                 <div class="cf" id="topMonth-loader">
                     <div class="loader3"></div>
                 </div>
                 <canvas id="topMonth"></canvas>
+
                 <h3 class="cf">Top Posters of the Past Year</h3>
+                <div class="chart-nav">
+                    <select id="topYear-select" onchange="updateChart('topYear', this.value)"></select>
+                </div>
                 <div class="cf" id="topYear-loader">
                     <div class="loader3"></div>
                 </div>
                 <canvas id="topYear"></canvas>
+
                 <h3 class="cf">Posts/Month Over Time</h3>
                 <div class="cf" id="amountOverTime-loader">
                     <div class="loader3"></div>
@@ -187,14 +214,9 @@
         </div>
     </div>
     <script>
-        // const params = new URLSearchParams(location.search)
-        // const category = params.get("category") || null
-        // const 
-
         function findUser(e) {
             e.preventDefault()
             const toSearch = document.querySelector("#usersearch").value
-            console.log(toSearch)
             location.href = `/find?username=${toSearch}&category=${window.category}`
         }
 
@@ -206,124 +228,108 @@
         function htmlToNode(html) {
             const template = document.createElement('template');
             template.innerHTML = html;
-            const nNodes = template.content.childNodes.length;
             return template.content.firstChild;
         }
 
-        function sleep(ms) {
-            return new Promise(resolve => setTimeout(resolve, ms));
+        function toIsoDate(date) {
+            const y = date.getFullYear();
+            const m = String(date.getMonth() + 1).padStart(2, '0');
+            const d = String(date.getDate()).padStart(2, '0');
+            return `${y}-${m}-${d}`;
         }
 
-        (async function go() {
-            let searchParams = new URLSearchParams(location.search)
-            window.page = searchParams.get("page") || 1
-            window.category = searchParams.get("category") || 0
-            document.querySelector("#categorySwitcher").value = ""
-            document.querySelector("#prev").href = "?page=" + (parseInt(page) - 1) + "&category=" + category
-            document.querySelector("#next").href = "?page=" + (parseInt(page) + 1) + "&category=" + category
-            document.querySelector("#gopage").value = page
-            if (page == 1) {
-                document.querySelector("#prev").hidden = true
-            }
-            console.log(page)
-            let data = (await (await fetch(`https://api.scratchpost.quuq.dev/leaderboard?limit=100${category ? "&category=" + category : ""}${"&offset=" + (page - 1) * 100}`)).json())
-            // for ([i, d] of data.entries()) {
-            //     // data[i] = JSON.parse(d)
-            //     const item = d.split(",")
-            //     data[i] = { user: item[0], count: parseInt(item[1].trim()) }
-            // }
+        function initSelectors() {
+            const now = new Date();
 
-            // if (page > Math.floor(data.length / 1000)) {
-            //     document.querySelector("#next").hidden = true
-            // }
-
-            document.querySelector("#gopage").addEventListener("keyup", ({ key }) => {
-                if (key === "Enter") {
-                    if (!isNaN(document.querySelector("#gopage").value))
-                        location.search = "?page=" + document.querySelector("#gopage").value + "&category=" + category
-                }
-            })
-
-            console.log(data)
-            window.data = data
-            container = document.querySelector("#list")
-            container2 = document.querySelector("#table")
-            let max = data[0].count
-            let i2 = (page - 1) * 100
-            // if (page == 1) {
-            //     i2 = 0
-            // } else {
-            //     i2 = (page - 1) * 1000
-            // }
-            let base = 0
-            let mode = 0
-            for (let [i, item] of data.entries()) {
-                user = data[i + base]
-                // console.log(user, i, data, data[i])
-                /*if (mode == 0) {
-                    if (i2 > -1) {
-                        mode = 1
-                        continue
-                    }
-                    newEl = htmlToNode(`<div data-target-width="${(user.count / max * 100).toFixed(3)}%" style="width: fit-content; margin: 5px auto;" class="item"><span style="margin: 0px 5px;">#${i2 + 1}</span><span>${user.user}</span><span style="margin-left: auto;margin-right: 10px;">${user.count}</span></div>`)
-                    container.appendChild(newEl)
-                    if (i2 > -1) mode = 1
-                } else {*/
-                newEl = htmlToNode(`<tr id="${i}"><td>#${i2 + 1} <a class="forum-user-link" target="_blank" href="/users/${user.username}">${user.username}</td><td style="width: 60px;text-align: center;">${user.count}</td></tr>`)
-                container2.appendChild(newEl)
-                // if (i2 > 100 + base - 2) break
-                i2++
-                if (i2 == data.length) break
+            const yearSelect = document.getElementById('topYear-select');
+            yearSelect.add(new Option("Current Rolling Year", "rolling"));
+            
+            const currentYear = now.getFullYear();
+            for (let y = currentYear - 1; y >= 2013; y--) {
+                const start = `${y}-01-01`;
+                const end = `${y+1}-01-01`;
+                yearSelect.add(new Option(y.toString(), JSON.stringify({ after: start, before: end })));
             }
 
-            document.querySelector("#table").hidden = false
-            document.querySelector(".loader3").style.display = "none"
+            const monthSelect = document.getElementById('topMonth-select');
+            monthSelect.add(new Option("Current Rolling Month", "rolling"));
 
-            if (searchParams.has("item")) {
-                const el = document.getElementById((parseInt(searchParams.get("item")) - 1).toString())
-                el.scrollIntoView({
-                    behavior: 'auto',
-                    block: 'center',
-                    inline: 'center',
-                    behavior: "smooth"
-                });
-                el.style.backgroundColor = "lightyellow"
+            let mDate = new Date(now.getFullYear(), now.getMonth(), 1);
+            
+            for (let i = 0; i < 12; i++) {
+                mDate.setMonth(mDate.getMonth() - 1);
+                const start = new Date(mDate);
+                const end = new Date(start);
+                end.setMonth(end.getMonth() + 1);
+
+                const label = start.toLocaleString('default', { month: 'long', year: 'numeric' });
+                monthSelect.add(new Option(label, JSON.stringify({ after: toIsoDate(start), before: toIsoDate(end) })));
             }
 
-            const msDay = 86400000
-            const lastWeek = new Date(Date.now() - (7 * msDay)).toISOString().substring(0, 10);
-            const lastMonth = new Date(Date.now() - (31 * msDay)).toISOString().substring(0, 10);
-            const lastYear = new Date(Date.now() - (365 * msDay)).toISOString().substring(0, 10);
-            const allTime = null;
-            console.log(lastWeek, lastMonth, lastYear)
+            const weekSelect = document.getElementById('topWeek-select');
+            weekSelect.add(new Option("Current Rolling Week", "rolling"));
 
-            await createChart("#topAll", allTime)
-            await createChart("#topWeek", lastWeek)
-            await createChart("#topMonth", lastMonth)
-            await createChart("#topYear", lastYear)
-            async function createChart(container, timeFrame) {
+            let wDate = new Date(now);
+            const dayOfWeek = wDate.getDay(); 
+            const diffToMonday = (dayOfWeek + 6) % 7; 
+            wDate.setDate(wDate.getDate() - diffToMonday); 
+            wDate.setHours(0,0,0,0);
+            
+            wDate.setDate(wDate.getDate() - 7);
 
-                let data2 = (await (await fetch(`https://api.scratchpost.quuq.dev/leaderboard?limit=20${timeFrame ? "&after=" + timeFrame : ""}${category ? "&category=" + category : ""}`)).json())
-                console.log(data2)
-                const ctx = document.querySelector(container)
-                document.querySelector(`${container}-loader`).style.display = "none"
+            for (let i = 0; i < 10; i++) {
+                const start = new Date(wDate);
+                const end = new Date(wDate);
+                end.setDate(end.getDate() + 7);
 
-                var chartData = {
-                    labels: data2.map(el => el.username),
-                    datasets: [
-                        {
-                            label: 'Posts',
-                            data: data2.map(el => el.count),
-                            backgroundColor: "#ffc354"
-                        }
-                    ]
+                const label = `Week of ${start.toLocaleDateString()}`;
+                weekSelect.add(new Option(label, JSON.stringify({ after: toIsoDate(start), before: toIsoDate(end) })));
+                
+                wDate.setDate(wDate.getDate() - 7);
+            }
+        }
+
+        window.chartInstances = {};
+
+        window.updateChart = async function(id, value) {
+            document.querySelector(`#${id}-loader`).style.display = "block";
+            
+            if (window.chartInstances[id]) {
+                window.chartInstances[id].destroy();
+            }
+
+            let url = "https://api.scratchpost.quuq.dev/leaderboard?limit=20";
+            if (window.category) url += `&category=${window.category}`;
+
+            if (value === "rolling") {
+                const msDay = 86400000;
+                let duration = 0;
+                if (id === 'topWeek') duration = 7 * msDay;
+                if (id === 'topMonth') duration = 31 * msDay;
+                if (id === 'topYear') duration = 365 * msDay;
+                
+                const d = new Date(Date.now() - duration).toISOString().substring(0, 10);
+                url += `&after=${d}`;
+            } else {
+                const range = JSON.parse(value);
+                url += `&after=${range.after}&before=${range.before}`;
+            }
+
+            try {
+                const data = await (await fetch(url)).json();
+                document.querySelector(`#${id}-loader`).style.display = "none";
+                
+                const ctx = document.querySelector("#" + id);
+                const chartData = {
+                    labels: data.map(el => el.username),
+                    datasets: [{
+                        label: 'Posts',
+                        data: data.map(el => el.count),
+                        backgroundColor: "#ffc354"
+                    }]
                 };
 
-                var myBar = doChart(ctx, chartData)
-            }
-
-            function doChart(ctx, chartData) {
-                return new Chart(ctx, {
+                window.chartInstances[id] = new Chart(ctx, {
                     type: "bar",
                     data: chartData,
                     options: {
@@ -342,8 +348,85 @@
                             responsive: true
                         }
                     }
+                });
+            } catch (e) {
+                console.error("Failed to load chart", e);
+            }
+        };
+
+        (async function go() {
+            let searchParams = new URLSearchParams(location.search)
+            window.page = searchParams.get("page") || 1
+            window.category = searchParams.get("category") || 0
+            document.querySelector("#categorySwitcher").value = ""
+            document.querySelector("#prev").href = "?page=" + (parseInt(page) - 1) + "&category=" + category
+            document.querySelector("#next").href = "?page=" + (parseInt(page) + 1) + "&category=" + category
+            document.querySelector("#gopage").value = page
+            if (page == 1) {
+                document.querySelector("#prev").hidden = true
+            }
+
+            let data = (await (await fetch(`https://api.scratchpost.quuq.dev/leaderboard?limit=100${category ? "&category=" + category : ""}${"&offset=" + (page - 1) * 100}`)).json())
+            
+            document.querySelector("#gopage").addEventListener("keyup", ({ key }) => {
+                if (key === "Enter") {
+                    if (!isNaN(document.querySelector("#gopage").value))
+                        location.search = "?page=" + document.querySelector("#gopage").value + "&category=" + category
+                }
+            })
+
+            window.data = data
+            container = document.querySelector("#list")
+            container2 = document.querySelector("#table")
+            let i2 = (page - 1) * 100
+
+            for (let [i, item] of data.entries()) {
+                user = data[i]
+                newEl = htmlToNode(`<tr id="${i}"><td>#${i2 + 1} <a class="forum-user-link" target="_blank" href="/users/${user.username}">${user.username}</td><td style="width: 60px;text-align: center;">${user.count}</td></tr>`)
+                container2.appendChild(newEl)
+                i2++
+                if (i2 == data.length) break
+            }
+
+            document.querySelector("#table").hidden = false
+            document.querySelector(".loader3").style.display = "none"
+
+            if (searchParams.has("item")) {
+                const el = document.getElementById((parseInt(searchParams.get("item")) - 1).toString())
+                if (el) {
+                    el.scrollIntoView({ behavior: 'auto', block: 'center', inline: 'center' });
+                    el.style.backgroundColor = "lightyellow"
+                }
+            }
+
+            initSelectors();
+            
+            async function createTopAll() {
+                let data2 = (await (await fetch(`https://api.scratchpost.quuq.dev/leaderboard?limit=20${category ? "&category=" + category : ""}`)).json())
+                const ctx = document.querySelector("#topAll")
+                document.querySelector(`#topAll-loader`).style.display = "none"
+                new Chart(ctx, {
+                    type: "bar",
+                    data: {
+                        labels: data2.map(el => el.username),
+                        datasets: [{ label: 'Posts', data: data2.map(el => el.count), backgroundColor: "#ffc354" }]
+                    },
+                    options: { 
+                        plugins: { 
+                            tooltip: { mode: 'index', intersect: false },
+                            legend: { display: false },
+                            hover: { mode: 'index', intersect: false }
+                        }, 
+                        responsive: true 
+                    }
                 })
             }
+            createTopAll();
+
+            updateChart("topWeek", "rolling");
+            updateChart("topMonth", "rolling");
+            updateChart("topYear", "rolling");
+
             var container = "#amountOverTime"
             const ctx2 = document.querySelector(container)
             var data2 = await (await fetch(`https://api.scratchpost.quuq.dev/stats/posts/time${category ? "?category=" + category : ""}`)).json()
@@ -351,96 +434,60 @@
             data2.pop()
             var chartData = {
                 labels: data2.map(el => new Date(el.time)),
-                datasets: [
-                    {
-                        label: 'Posts per month',
-                        data: data2.map(el => el.count),
-                        backgroundColor: "green",
-                        pointRadius: 2,
-                        pointHoverRadius: 3,
-                        borderColor: "lightgreen",
-                        lineTension: 0.5
-                    }
-                ]
+                datasets: [{
+                    label: 'Posts per month',
+                    data: data2.map(el => el.count),
+                    backgroundColor: "green",
+                    pointRadius: 2,
+                    pointHoverRadius: 3,
+                    borderColor: "lightgreen",
+                    lineTension: 0.5
+                }]
             };
 
             new Chart(ctx2, {
                 type: "line",
                 data: chartData,
                 options: {
-                    plugins: {
-                        tooltip: {
-                            mode: 'index',
-                            intersect: false,
-                        },
-                        legend: {
-                            display: false
-                        },
-                        hover: {
-                            mode: 'index',
-                            intersect: false
-                        },
-                        responsive: true
+                    plugins: { 
+                        tooltip: { mode: 'index', intersect: false },
+                        legend: { display: false },
+                        hover: { mode: 'index', intersect: false }
                     },
                     scales: {
-                        x: {
-                            type: 'time',
-                            min: new Date(data2[0]),
-                            time: {
-                                unit: "month",
-                                tooltipFormat: 'MMM yyyy',
-                            }
-                        }
+                        x: { type: 'time', min: new Date(data2[0]), time: { unit: "month", tooltipFormat: 'MMM yyyy' } }
                     }
                 }
             })
 
             var container = "#countOverTime"
             const ctx3 = document.querySelector(container)
-            var data2 = await (await fetch(`https://api.scratchpost.quuq.dev/stats/posts/all`)).json()
+            var data3 = await (await fetch(`https://api.scratchpost.quuq.dev/stats/posts/all`)).json()
             document.querySelector(`${container}-loader`).style.display = "none"
-            var chartData = {
-                labels: data2.map(el => new Date(el.time)),
-                datasets: [
-                    {
-                        label: 'Posts per month',
-                        data: data2.map(el => el.count),
-                        backgroundColor: "green",
-                        pointRadius: 2,
-                        pointHoverRadius: 3,
-                        borderColor: "lightgreen",
-                        lineTension: 0.5
-                    }
-                ]
+            var chartData3 = {
+                labels: data3.map(el => new Date(el.time)),
+                datasets: [{
+                    label: 'Posts per month',
+                    data: data3.map(el => el.count),
+                    backgroundColor: "green",
+                    pointRadius: 2,
+                    pointHoverRadius: 3,
+                    borderColor: "lightgreen",
+                    lineTension: 0.5
+                }]
             };
 
             new Chart(ctx3, {
                 type: "line",
-                data: chartData,
+                data: chartData3,
                 options: {
-                    plugins: {
-                        tooltip: {
-                            mode: 'index',
-                            intersect: false,
-                        },
-                        legend: {
-                            display: false
-                        },
-                        hover: {
-                            mode: 'index',
-                            intersect: false
-                        },
-                        responsive: true
+                    plugins: { 
+                        tooltip: { mode: 'index', intersect: false },
+                        legend: { display: false },
+                        hover: { mode: 'index', intersect: false }
                     },
                     scales: {
-                        x: {
-                            type: 'time',
-                            min: new Date(data2[0]),
-                            time: {
-                                unit: "month",
-                                tooltipFormat: 'MMM yyyy',
-                            }
-                        }
+                        x: { type: 'time', min: new Date(data3[0]), time: { unit: "month", tooltipFormat: 'MMM yyyy' } }
                     }
                 }
             })
@@ -449,13 +496,18 @@
 
     </script>
     <script type="module">
-        import categoryMap from "https://cdn.jsdelivr.net/gh/jeffalo/ocular@f321922b56d96f5aa4b135315cc252ba95b3e807/assets/category-map.js" // thanks to jeffalo!
+        // get category map from ocular because jeffalo already did the hard work
+        import categoryMap from "https://cdn.jsdelivr.net/gh/jeffalo/ocular@f321922b56d96f5aa4b135315cc252ba95b3e807/assets/category-map.js" 
         const f = obj => Object.fromEntries(Object.entries(obj).map(a => a.reverse()))
         window.categories = f(Object.fromEntries(categoryMap))
         window.categories["All"] = "0"
         window.categories2 = Object.fromEntries(categoryMap)
         window.categories2["0"] = "All"
-        document.querySelector("#categorySwitcher").value = categories2[category]
+        
+        // set category dropdown to current category
+        const params = new URLSearchParams(location.search);
+        const cat = params.get("category") || "0";
+        document.querySelector("#categorySwitcher").value = categories2[cat];
     </script>
 </body>
 

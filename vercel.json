@@ -68,6 +68,18 @@
             "destination": "/users/:id"
         },
         {
+            "source": "/topic/:id",
+            "destination": "/search/posts?topic=:id"
+        },
+        {
+            "source": "/post/:id",
+            "destination": "/search/posts?post=:id"
+        },
+        {
+            "source": "/user/:id",
+            "destination": "/users/:id"
+        },
+        {
             "source": "/topics/:id",
             "destination": "/search/posts?topic=:id"
         },

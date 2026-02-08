@@ -139,7 +139,7 @@
             newEl.querySelector(".scratch").href = "https://scratch.mit.edu/discuss/post/" + post.id
             newEl.querySelector(".username").innerText = post.author;
             newEl.querySelector(".user-link").href = "/users/" + post.author;
-            newEl.querySelector(".user-img").src = `https://trampoline.turbowarp.org/avatars/by-username/${post.author}`;
+            newEl.querySelector(".user-img").src = `https://renderapi.quuq.dev/image/${post.author}`;
             newEl.querySelector(".content").innerHTML = post.content;
             container.appendChild(newEl);
         }

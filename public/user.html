@@ -254,16 +254,31 @@
             }
 
             let username = location.pathname.split("/").at(-1)
+            let paramsUsername = username
             if (!username) {
                 location.href = "/"
             }
-            let twData = (await (await fetch(`https://trampoline.turbowarp.org/api/users/${username}`)).json())
+            // let twData = (await (await fetch(`https://trampoline.turbowarp.org/api/users/${username}`)).json())
+            let twData = (await (await fetch("https://renderapi.quuq.dev/proxy", {
+                headers: {
+                    "X-URL": `https://api.scratch.mit.edu/users/${username}`
+                }
+            })).json())
             username = twData.username
+            if (!username) {
+                document.querySelector("#replace").innerHTML = `${paramsUsername} does not exist`
+                document.querySelector("#postCount .img-load-wrapper").remove()
+                document.querySelector("#output-data").remove()
+                document.querySelector("#output-posts").remove()
+                document.querySelector("#other-output-data").remove()
+                await new Promise(r => setTimeout(r, 99999999));
+            }
+
             const userID = twData.id
             console.log(username)
             document.querySelector("#postCount").querySelector("#user-wrapper").innerHTML = username
             document.querySelector("#showing-posts-for").innerHTML = `Showing ${username}'s posts`
-            document.querySelector("#user-image").src = `https://trampoline.turbowarp.org/avatars/by-username/${username}`
+            document.querySelector("#user-image").src = `https://renderapi.quuq.dev/image/${username}`
             document.title = `${username}'s forum posts - ScratchPost`
 
             const categories = Object.fromEntries(categoryData)

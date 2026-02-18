@@ -98,8 +98,15 @@ body {
     text-align: center;
 }
 
-#changelog-link {
+#dark-mode-toggle {
+    font-size: x-large;
     margin-right: 20px;
+    margin-top: -5px;
+    text-decoration: none;
+}
+
+#dark-mode-toggle:hover {
+    cursor: pointer;
 }
 
 #about-link {

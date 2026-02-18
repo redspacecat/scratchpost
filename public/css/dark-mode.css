@@ -4,10 +4,11 @@
     --text-primary: #e0e0e0;
     --text-secondary: #b0b0b0;
     --border-color: #444;
-    --nav-bg: #1a1a1a;
+    --nav-bg: #0d0d46;
     --input-bg: #3a3a3a;
     --button-hover: #1450a0;
     --link-color: #66d9ff;
+    /* --link-color: #ffffff; */
     --link-hover: #99e6ff;
 }
 

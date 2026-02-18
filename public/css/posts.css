@@ -68,7 +68,7 @@
 .scratch,
 .id,
 .author-nav {
-    color: white;
+    color: white !important;
     text-decoration: none;
 }
 

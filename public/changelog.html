@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Changelog - ScratchPost</title>
     <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/dark-mode.css">
 </head>
 
 <body>
@@ -19,10 +20,12 @@
         <a href="/about" id="about-link">About</a>
         <a href="https://scratch.mit.edu/discuss/topic/860435/" id="feedback-link" target="_blank">Feedback</a>
         <a href="/changelog" id="changelog-link">Changelog</a>
+        <button id="dark-mode-toggle" onclick="toggleDarkMode()">🌙</button>
     </nav>
     <div class="page">
         <h2>ScratchPost changelog</h2>
         <ul>
+            <li>2025-2-17 — Added dark mode</li>
             <li>2025-2-17 — Fix typos, minor changes</li>
             <li>2025-2-7 — Made user images user my own API</li>
             <li>2025-1-31 — Added new cumulative post count by category chart on leaderboard page</li>
@@ -53,5 +56,7 @@
             <li>2025-1-10 — Released site</li>
         </ul>
     </div>
-    </body>
+    <script src="/js/dark-mode.js"></script>
+</body>
+
 </html>

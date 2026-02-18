@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/dark-mode.css">
     <title>ScratchPost - Scratch Forums Viewer</title>
     <style>
         body {
@@ -15,6 +16,53 @@
             background-color: rgb(234, 234, 234);
             border-radius: 5px;
             padding: 3px;
+        }
+
+        .button-container {
+            width: fit-content;
+            margin: 0 auto;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .fancy-button {
+            padding: 20px 30px;
+            font-size: large;
+            font-weight: 600;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(135deg, #1992fc 0%, #0d5fa0 100%);
+            color: white;
+        }
+
+        .fancy-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, #1ab0ff 0%, #1671c1 100%);
+        }
+
+        .fancy-button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        [data-theme="dark"] .fancy-button {
+            background: linear-gradient(135deg, #2a5fbf 0%, #1a3f7f 100%);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        [data-theme="dark"] .fancy-button:hover {
+            background: linear-gradient(135deg, #3a7fff 0%, #2a5fbf 100%);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
         }
     </style>
 </head>
@@ -30,13 +78,15 @@
         <a href="/about" id="about-link">About</a>
         <a href="https://scratch.mit.edu/discuss/topic/860435/" id="feedback-link" target="_blank">Feedback</a>
         <a href="/changelog" id="changelog-link">Changelog</a>
+        <button id="dark-mode-toggle" onclick="toggleDarkMode()">🌙</button>
     </nav>
     <h2 style="text-align: center;">ScratchPost</h2>
-    <div style="width: fit-content;margin: 0 auto;">
-    <a href="/search"><button style="padding: 20px;font-size: large;">🔍 Search Forums</button></a>
-    <a href="/leaderboards"><button style="padding: 20px;font-size: large;">📈 View Leaderboards</button></a>
-    <a href="/view"><button style="padding: 20px;font-size: large;">📊 View User Stats</button></a>
+    <div class="button-container">
+        <a href="/search" class="fancy-button">🔍 Search Forums</a>
+        <a href="/leaderboards" class="fancy-button">📈 View Leaderboards</a>
+        <a href="/view" class="fancy-button">📊 View User Stats</a>
     </div>
+    <script src="/js/dark-mode.js"></script>
 </body>
 
 </html>

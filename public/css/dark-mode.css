@@ -1,0 +1,168 @@
+:root[data-theme="dark"] {
+    --bg-primary: #1e1e1e;
+    --bg-secondary: #2d2d2d;
+    --text-primary: #e0e0e0;
+    --text-secondary: #b0b0b0;
+    --border-color: #444;
+    --nav-bg: #102857;
+    --input-bg: #3a3a3a;
+    --button-hover: #1450a0;
+}
+
+:root[data-theme="light"] {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f7f7f7;
+    --text-primary: #000000;
+    --text-secondary: #333333;
+    --border-color: #e0e0e0;
+    --nav-bg: #5b8edd;
+    --input-bg: #ffffff;
+    --button-hover: #1671c1;
+}
+
+/* Dark mode body */
+[data-theme="dark"] body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+/* Dark mode nav */
+[data-theme="dark"] .nav {
+    background-color: var(--nav-bg);
+}
+
+[data-theme="dark"] .nav * {
+    color: var(--text-primary);
+}
+
+/* Dark mode inputs */
+[data-theme="dark"] input[type="text"],
+[data-theme="dark"] input[type="password"],
+[data-theme="dark"] input[type="search"],
+[data-theme="dark"] input[type="number"],
+[data-theme="dark"] input[type="date"],
+[data-theme="dark"] select,
+[data-theme="dark"] textarea {
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+
+/* Dark mode posts */
+[data-theme="dark"] .post {
+    border-color: var(--border-color);
+    background-color: var(--bg-secondary);
+}
+
+[data-theme="dark"] .post .post-top {
+    background-color: #2a4a7a;
+}
+
+[data-theme="dark"] .post .left {
+    background-color: var(--bg-secondary) !important;
+    box-shadow: 1px 0 var(--border-color) !important;
+}
+
+[data-theme="dark"] .post .right {
+    background-color: var(--bg-secondary);
+}
+
+[data-theme="dark"] .post .user-link {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .post .username:hover {
+    color: #66b3ff;
+}
+
+/* Dark mode tables */
+[data-theme="dark"] table,
+[data-theme="dark"] #table {
+    border-color: var(--border-color);
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] table td,
+[data-theme="dark"] table th,
+[data-theme="dark"] #table td,
+[data-theme="dark"] #table th {
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] table th {
+    background-color: #3a3a3a;
+}
+
+/* Dark mode buttons */
+[data-theme="dark"] .coolbtn,
+[data-theme="dark"] #load-more-button {
+    background-color: #1992fc;
+    border-color: #0d5fa0;
+}
+
+[data-theme="dark"] .coolbtn:hover,
+[data-theme="dark"] #load-more-button:hover {
+    background-color: var(--button-hover);
+}
+
+/* Dark mode page background */
+[data-theme="dark"] .page {
+    color: var(--text-primary);
+}
+
+/* Dark mode code blocks */
+[data-theme="dark"] code,
+[data-theme="dark"] .code,
+[data-theme="dark"] .djangobb blockquote {
+    background-color: #3a3a3a;
+    color: var(--text-primary);
+    border-color: var(--border-color);
+}
+
+/* Dark mode loader */
+[data-theme="dark"] .img-load-wrapper {
+    background-color: #3a3a3a;
+}
+
+/* Dark mode link colors */
+[data-theme="dark"] .nolink {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .nolink:hover {
+    color: #66b3ff;
+}
+
+[data-theme="dark"] .forum-user-link {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .forum-user-link:hover {
+    color: #66b3ff;
+}
+
+/* Dark mode details/summary */
+[data-theme="dark"] details {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] summary {
+    cursor: pointer;
+}
+
+/* Dark mode toggle button */
+#dark-mode-toggle {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2em;
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: 0.25s;
+}
+
+#dark-mode-toggle:hover {
+    opacity: 0.8;
+}

@@ -8,6 +8,7 @@
     <title>Forum Posts - ScratchPost</title>
 
     <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/dark-mode.css">
     <link rel="stylesheet" href="/css/spinner.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0"></script>
@@ -17,6 +18,7 @@
     <script
         src="https://cdn.scratch.mit.edu/scratchr2/static/__5b3e40ec58a840b41702360e9891321b__//djangobb_forum/scratchblocks/translations.js"></script>
     <script src="/js/posts.js"></script>
+    <script src="/js/dark-mode.js"></script>
     <style>
         .loader3 {
             width: 32px;
@@ -108,6 +110,7 @@
         <a href="/about" id="about-link">About</a>
         <a href="https://scratch.mit.edu/discuss/topic/860435/" id="feedback-link" target="_blank">Feedback</a>
         <a href="/changelog" id="changelog-link">Changelog</a>
+        <button id="dark-mode-toggle" onclick="toggleDarkMode()">🌙</button>
     </nav>
 
     <div id="container">

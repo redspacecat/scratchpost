@@ -724,7 +724,7 @@
                 }
                 document.querySelector("#load-more-button").style.display = "block"
             }
-            fetchMorePosts()
+            await fetchMorePosts()
 
             document.querySelector("#load-more-button").addEventListener("click", fetchMorePosts)
 
@@ -774,10 +774,10 @@
                 });
 
                 document.querySelectorAll('.post').forEach(el => el.dataset.new = "false")
-
-                getSignature(username)
-                getRankings(categoryPostData)
             }
+
+            getSignature(username)
+            getRankings(categoryPostData)
         </script>
 </body>
 

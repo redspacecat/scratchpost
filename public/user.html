@@ -302,7 +302,6 @@
                 document.querySelector("#other-output-data").remove()
                 await new Promise(r => setTimeout(r, 99999999));
             }
-            getSignature(username)
 
             // response = response.split("\n")
             const postCount = response.length
@@ -330,7 +329,6 @@
             categoryPostData = items
 
             // console.log(categoryPostData)
-            getRankings(categoryPostData)
 
             const categoryEl = document.getElementById("categories")
             // categoryEl.hidden = false
@@ -708,7 +706,6 @@
                 });
             }
 
-
             window.postLimit = 20
             window.postOffset = 0
             async function fetchMorePosts() {
@@ -774,6 +771,9 @@
                 });
 
                 document.querySelectorAll('.post').forEach(el => el.dataset.new = "false")
+
+                getSignature(username)
+                getRankings(categoryPostData)
             }
         </script>
 </body>

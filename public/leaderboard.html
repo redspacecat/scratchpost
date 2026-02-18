@@ -346,6 +346,7 @@
                         responsive: true
                     }
                 });
+                updateChartColors();
             } catch (e) {
                 console.error(e);
             }
@@ -395,7 +396,7 @@
 
             let data2 = await (await fetch(`https://api.scratchpost.quuq.dev/leaderboard?limit=20${category ? "&category=" + category : ""}`)).json();
             document.querySelector(`#topAll-loader`).style.display = "none";
-            new Chart(document.querySelector("#topAll"), {
+            window.chartInstances['topAll'] = new Chart(document.querySelector("#topAll"), {
                 type: "bar",
                 data: {
                     labels: data2.map(el => el.username),
@@ -422,6 +423,7 @@
                     responsive: true
                 }
             });
+            updateChartColors();
 
             await updateChart("topWeek", "rolling");
             await updateChart("topMonth", "rolling");
@@ -432,7 +434,7 @@
             document.querySelector(`#amountOverTime-loader`).style.display = "none";
             document.querySelector(`#categoryCumulative-loader`).style.display = "none";
 
-            new Chart(document.querySelector("#amountOverTime"), {
+            window.chartInstances['amountOverTime'] = new Chart(document.querySelector("#amountOverTime"), {
                 type: "line",
                 data: {
                     labels: timeData.map(el => new Date(el.time)),
@@ -470,6 +472,7 @@
                     }
                 }
             });
+            updateChartColors();
 
             let runningTotal = 0;
             const cumulativeData = timeData.map(el => {
@@ -479,7 +482,7 @@
                     count: runningTotal
                 };
             });
-            new Chart(document.querySelector("#categoryCumulative"), {
+            window.chartInstances['categoryCumulative'] = new Chart(document.querySelector("#categoryCumulative"), {
                 type: "line",
                 data: {
                     labels: cumulativeData.map(el => new Date(el.time)),
@@ -517,10 +520,11 @@
                     }
                 }
             });
+            updateChartColors();
 
             const allData = await (await fetch(`https://api.scratchpost.quuq.dev/stats/posts/all`)).json();
             document.querySelector(`#countOverTime-loader`).style.display = "none";
-            new Chart(document.querySelector("#countOverTime"), {
+            window.chartInstances['countOverTime'] = new Chart(document.querySelector("#countOverTime"), {
                 type: "line",
                 data: {
                     labels: allData.map(el => new Date(el.time)),
@@ -558,6 +562,7 @@
                     }
                 }
             });
+            updateChartColors();
         })();
     </script>
     <script type="module">

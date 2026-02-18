@@ -455,6 +455,7 @@
             // }
 
             createPostsChart(postCountsOverTime, categoryPostData)
+            updateChartColors()
             // console.log(allPostCounts)
 
             // function makeStone(number) {
@@ -506,6 +507,7 @@
                 document.getElementById('ppm').previousElementSibling.style.display = "none"
                 document.getElementById('categoryDonut').previousElementSibling.style.display = "none"
 
+                window.userPageCharts = window.userPageCharts || {};
                 var chart = new Chart(ctx, {
                     type: 'line',
                     data: {
@@ -557,6 +559,7 @@
                         responsive: true
                     },
                 })
+                window.userPageCharts.chart = chart;
                 var chart2 = new Chart(ctx2, {
                     type: 'line',
                     data: {
@@ -609,6 +612,7 @@
 
                     },
                 })
+                window.userPageCharts.chart2 = chart2;
                 // var chart = new Chart(ctx, {
                 //     type: 'line',
                 //     data: {
@@ -707,6 +711,7 @@
 
                     }
                 });
+                window.userPageCharts.chart3 = chart3;
             }
 
             window.postLimit = 20

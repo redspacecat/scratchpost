@@ -384,10 +384,10 @@
                 const el = document.getElementById((parseInt(searchParams.get("item")) - 1).toString());
                 if (el) {
                     el.scrollIntoView({
-                        behavior: 'auto',
+                        behavior: 'smooth',
                         block: 'center'
                     });
-                    el.style.backgroundColor = "lightyellow";
+                    el.classList.add('highlighted-item');
                 }
             }
 

@@ -123,6 +123,11 @@
     overflow-x: scroll;
 }
 
+/* Chart line colors */
+canvas {
+    filter: grayscale(0%);
+}
+
 .post {
     border: 1px solid #e0e0e0;
     border-top-left-radius: 10px;

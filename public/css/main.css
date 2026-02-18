@@ -108,10 +108,10 @@ body {
 
 .nolink {
     text-decoration: none;
-    color: black;
+    color: #0056ff;
 }
 
 .nolink:hover {
     text-decoration: none;
-    color: blue;
+    color: #0041cc;
 }

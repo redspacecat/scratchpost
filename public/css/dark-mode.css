@@ -4,9 +4,11 @@
     --text-primary: #e0e0e0;
     --text-secondary: #b0b0b0;
     --border-color: #444;
-    --nav-bg: #102857;
+    --nav-bg: #1a1a1a;
     --input-bg: #3a3a3a;
     --button-hover: #1450a0;
+    --link-color: #66d9ff;
+    --link-hover: #99e6ff;
 }
 
 :root[data-theme="light"] {
@@ -18,6 +20,8 @@
     --nav-bg: #5b8edd;
     --input-bg: #ffffff;
     --button-hover: #1671c1;
+    --link-color: #0056ff;
+    --link-hover: #0041cc;
 }
 
 /* Dark mode body */
@@ -75,6 +79,23 @@
     color: #66b3ff;
 }
 
+/* Post username colors */
+[data-theme="dark"] .post .user-link {
+    color: white;
+}
+
+[data-theme="dark"] .post .username:hover {
+    color: #66b3ff;
+}
+
+[data-theme="light"] .post .user-link {
+    color: black;
+}
+
+[data-theme="light"] .post .username:hover {
+    color: blue;
+}
+
 /* Dark mode tables */
 [data-theme="dark"] table,
 [data-theme="dark"] #table {
@@ -126,43 +147,63 @@
     background-color: #3a3a3a;
 }
 
-/* Dark mode link colors */
+/* Dark mode link colors for content area only */
 [data-theme="dark"] .nolink {
     color: var(--text-primary);
 }
 
 [data-theme="dark"] .nolink:hover {
-    color: #66b3ff;
+    color: var(--text-primary);
+}
+
+/* Light mode - keep nav links white */
+[data-theme="light"] .nav * {
+    color: white;
+}
+
+[data-theme="light"] .nav a:hover {
+    text-decoration: underline;
+}
+
+/* Light mode link colors for content area only */
+[data-theme="light"] .nolink {
+    color: var(--text-primary);
+}
+
+[data-theme="light"] .nolink:hover {
+    color: var(--text-primary);
+}
+
+/* Leaderboard table user links - dark text/light text depending on theme */
+[data-theme="light"] .forum-user-link {
+    color: #1a1a1a;
+}
+
+[data-theme="light"] .forum-user-link:hover {
+    color: #0056ff;
 }
 
 [data-theme="dark"] .forum-user-link {
-    color: var(--text-primary);
+    color: #d0d0d0;
 }
 
 [data-theme="dark"] .forum-user-link:hover {
-    color: #66b3ff;
+    color: #e0e0e0;
 }
 
-/* Dark mode details/summary */
-[data-theme="dark"] details {
-    color: var(--text-primary);
+[data-theme="dark"] a {
+  color: var(--link-color);
 }
 
-[data-theme="dark"] summary {
-    cursor: pointer;
+/* Leaderboard table highlight colors for specific item */
+[data-theme="light"] #table tr.highlighted-item {
+    background-color: lightyellow;
 }
 
-/* Dark mode toggle button */
-#dark-mode-toggle {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1.2em;
-    cursor: pointer;
-    padding: 5px 10px;
-    transition: 0.25s;
+[data-theme="dark"] #table tr.highlighted-item {
+    background-color: #2d5a2d;
 }
 
-#dark-mode-toggle:hover {
-    opacity: 0.8;
+#table tr.highlighted-item {
+    transition: background-color 0.3s ease;
 }

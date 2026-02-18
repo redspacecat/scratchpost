@@ -1,13 +1,23 @@
 function initDarkMode() {
-    const isDarkMode = localStorage.getItem('darkMode') === 'enabled';
+    let isDarkMode = localStorage.getItem('darkMode');
+    
+    // If no preference saved, check system preference
+    if (isDarkMode === null) {
+        isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'enabled' : 'disabled';
+    } else {
+        isDarkMode = isDarkMode === 'enabled';
+    }
+    
     const toggle = document.getElementById('dark-mode-toggle');
     
-    if (isDarkMode) {
+    if (isDarkMode === true || isDarkMode === 'enabled') {
         document.documentElement.setAttribute('data-theme', 'dark');
         toggle.textContent = '☀️';
+        localStorage.setItem('darkMode', 'enabled');
     } else {
         document.documentElement.setAttribute('data-theme', 'light');
         toggle.textContent = '🌙';
+        localStorage.setItem('darkMode', 'disabled');
     }
 }
 

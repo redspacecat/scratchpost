@@ -21,6 +21,7 @@
 
 .post .content {
     margin: 15px;
+    margin-bottom: 10px;
 }
 
 .post .left {
@@ -75,6 +76,7 @@
 .post .content {
     max-height: 275px;
     overflow-y: scroll;
+    flex-grow: 1;
 }
 
 .post .scratch {
@@ -116,6 +118,8 @@
 
 .post .right {
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 .post .scratchblocks {
@@ -133,6 +137,20 @@ canvas {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     box-shadow: 0 2px 3px rgba(34, 25, 25, 0.3);
+}
+
+.post .post-bottom {
+    text-align: right;
+    margin: 0px 10px 5px 10px;
+    height: 22px;
+}
+
+.post .post-bottom * {
+    vertical-align: middle;
+}
+
+.post .report {
+    margin-left: 10px;
 }
 
 /*
@@ -165,7 +183,12 @@ canvas {
     font-family: Menlo, Monaco, Consolas, "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
 }
 .djangobb pre.blocks {
-    font: bold 10px/1 "Lucida Grande", Verdana, Arial, "DejaVu Sans", sans-serif;
+    font:
+        bold 10px/1 "Lucida Grande",
+        Verdana,
+        Arial,
+        "DejaVu Sans",
+        sans-serif;
     margin: 0 0 3px;
     position: relative;
 }

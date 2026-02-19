@@ -13,12 +13,14 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0"></script>
     <link rel="stylesheet" href="/css/posts.css">
+    <link rel="stylesheet" href="/css/reactions.css">
     <script
         src="https://cdn.scratch.mit.edu/scratchr2/static/__5b3e40ec58a840b41702360e9891321b__//djangobb_forum/scratchblocks/scratchblocks.min.js"></script>
     <script
         src="https://cdn.scratch.mit.edu/scratchr2/static/__5b3e40ec58a840b41702360e9891321b__//djangobb_forum/scratchblocks/translations.js"></script>
     <script src="/js/posts.js"></script>
     <script src="/js/dark-mode.js"></script>
+    <script src="/js/reactions.js"></script>
     <style>
         .loader3 {
             width: 32px;
@@ -737,34 +739,44 @@
 
                 for (const post of posts) {
                     const basePost = `<div class="post" data-new="true">
-<div class="post-top">
-    <a class="date" target="_blank"></a>
-    <a class="subforum" target="_blank"></a>
-    <span class="topic-subforum-divider">&raquo;</span>
-    <a class="topic" target="_blank"></a>
-</div>
-<div class="container">
-    <div class="left">
-        <a class="user-link" target="_blank">
-            <div class="username"></div>
-            <img class="user-img">
-        </a>
-        <br>
-        <span class="post-count"></span>
-    </div>
-    <div class="right">
-        <div class="content"></div>
-    </div>
-</div>
-</div>`;
+            <div class="post-top">
+                <a class="date"></a>
+                <a class="subforum"></a>
+                <span class="topic-subforum-divider">&raquo;</span>
+                <a class="topic"></a>
+                <a class="scratch" target="_blank">View on Scratch</a>
+            </div>
+            <div class="container">
+                <div class="left">
+                    <a class="user-link">
+                        <div class="username"></div>
+                        <img class="user-img" loading="lazy">
+                    </a>
+                    <br>
+                    <span class="post-count"></span>
+                </div>
+                <div class="right">
+                    <div class="content"></div>
+                    <div class="post-bottom">
+                        <span class="reactions-list"></span>
+                        <span class="reactions"></span>
+                        <span>&ThickSpace;&ThickSpace;⬅️ ocular reactions</span>
+                        <a class="report">Report</a>
+                    </div>
+                </div>
+            </div>
+            </div>`;
                     console.log(basePost.replaceAll(/\n[ ]+/g, ""));
                     const newEl = htmlToNode(basePost.replaceAll(/\n[ ]+/g, ""));
+                    newEl.dataset.post = post.id
                     newEl.querySelector(".date").innerText = new Date(post.date).toLocaleString()
-                    newEl.querySelector(".date").href = "https://scratch.mit.edu/discuss/post/" + post.id
+                    newEl.querySelector(".date").href = "/posts/" + post.id
                     newEl.querySelector(".subforum").innerText = post.category_name
                     newEl.querySelector(".subforum").href = "https://scratch.mit.edu/discuss/" + post.category_id
                     newEl.querySelector(".topic").innerText = post.topic_name
-                    newEl.querySelector(".topic").href = "https://scratch.mit.edu/discuss/topic/" + post.topic_id
+                    newEl.querySelector(".topic").href = "/topics/" + post.topic_id
+                    newEl.querySelector(".scratch").href = "https://scratch.mit.edu/discuss/post/" + post.id
+                    newEl.querySelector(".report").href = "https://scratch.mit.edu/discuss/misc/?action=report&post_id=" + post.id
                     newEl.querySelector(".username").innerText = username;
                     newEl.querySelector(".user-link").href = "https://scratch.mit.edu/users/" + username;
                     newEl.querySelector(".user-img").src = `https://cdn2.scratch.mit.edu/get_image/user/${userID || "default"}_90x90.png`;
@@ -777,6 +789,8 @@
                     languages: ["en", "de", "es", "fr", "zh_cn", "pl", "ja", "nl", "pt", "it", "he", "ko", "nb", "tr", "el", "ru", "ca", "id"],
                     style: "scratch3",
                 });
+
+                reactions(document.querySelectorAll('.post[data-new="true"]'))
 
                 document.querySelectorAll('.post').forEach(el => el.dataset.new = "false")
             }

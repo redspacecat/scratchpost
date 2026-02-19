@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/posts.css">
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/dark-mode.css">
+    <link rel="stylesheet" href="/css/reactions.css">
     <script
         src="https://cdn.scratch.mit.edu/scratchr2/static/__5b3e40ec58a840b41702360e9891321b__//djangobb_forum/scratchblocks/scratchblocks.min.js"></script>
     <script
@@ -127,11 +128,18 @@
                 </div>
                 <div class="right">
                     <div class="content"></div>
+                    <div class="post-bottom">
+                        <span class="reactions-list"></span>
+                        <span class="reactions"></span>
+                        <span>&ThickSpace;&ThickSpace;⬅️ ocular reactions</span>
+                        <a class="report">Report</a>
+                    </div>
                 </div>
             </div>
             </div>`;
             console.log(basePost.replaceAll(/\n[ ]+/g, ""));
             const newEl = htmlToNode(basePost.replaceAll(/\n[ ]+/g, ""));
+            newEl.dataset.post = post.id
             newEl.querySelector(".date").innerText = new Date(post.date).toLocaleString()
             newEl.querySelector(".date").href = "/posts/" + post.id
             newEl.querySelector(".subforum").innerText = post.category_name
@@ -143,6 +151,7 @@
             newEl.querySelector(".user-link").href = "/users/" + post.author;
             newEl.querySelector(".user-img").src = `https://renderapi.quuq.dev/image/${post.author}`;
             newEl.querySelector(".content").innerHTML = post.content;
+            newEl.querySelector(".report").href = "https://scratch.mit.edu/discuss/misc/?action=report&post_id=" + post.id
             container.appendChild(newEl);
         }
 
@@ -152,9 +161,12 @@
             style: "scratch3",
         });
 
+        reactions(document.querySelectorAll('.post[data-new="true"]'))
+
         document.querySelectorAll('.post').forEach(el => el.dataset.new = "false")
     }
 </script>
 <script src="/js/dark-mode.js"></script>
+<script src="/js/reactions.js"></script>
 
 </html>

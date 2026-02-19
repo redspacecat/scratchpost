@@ -46,6 +46,10 @@
             "destination": "/find.html"
         },
         {
+            "source": "/browse",
+            "destination": "/browse.html"
+        },
+        {
             "source": "/(.*)",
             "destination": "/api"
         }

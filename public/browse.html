@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse - ScratchPost</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/dark-mode.css">
+    <style>
+        table {
+            border-collapse: collapse;
+            border: 2px solid black;
+        }
+
+        tr,
+        td {
+            padding: 5px;
+            border: 2px solid black;
+        }
+
+        #topics {
+            margin: 20px auto;
+        }
+
+        #topics thead,
+        .replies,
+        #title,
+        h3 {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="nav">
+        <a href="/">ScratchPost</a>
+        <a href="/search">Search</a>
+        <a href="/view">User Stats</a>
+        <a href="/browse">Browse</a>
+        <a href="/leaderboard">Forum Leaderboards</a>
+        <a href="/leaderboard-history">Leaderboard History</a>
+        <a href="https://api.scratchpost.quuq.dev">API Docs</a>
+        <a href="/about" id="about-link">About</a>
+        <a href="https://scratch.mit.edu/discuss/topic/860435/" id="feedback-link" target="_blank">Feedback</a>
+        <a href="/changelog" id="changelog-link">Changelog</a>
+        <span id="dark-mode-toggle" onclick="toggleDarkMode()" title="Toggle dark mode">🌙</span>
+    </nav>
+    <div class="page">
+        <h2 id="title"></h2>
+        <div style="margin: 10px auto;font-size: large;" class="cf">
+            <span>Forum Category: </span>
+            <select id="categorySwitcher" onchange="changeCategory()">
+                <option value="All">All</option>
+                <optgroup label="Welcome to Scratch">
+                    <option value="Announcements">Announcements</option>
+                    <option value="New Scratchers">New Scratchers</option>
+                </optgroup>
+                <optgroup label="Making Scratch Projects">
+                    <option value="Help With Scripts">Help With Scripts</option>
+                    <option value="Show and Tell">Show and Tell</option>
+                    <option value="Project Ideas">Project Ideas</option>
+                    <option value="Collaboration">Collaboration</option>
+                    <option value="Requests">Requests</option>
+                    <option value="Project Save & Level Codes">Project Save & Level Codes</option>
+                </optgroup>
+                <optgroup label="About Scratch">
+                    <option value="Questions about Scratch">Questions about Scratch</option>
+                    <option value="Suggestions">Suggestions</option>
+                    <option value="Bugs and Glitches">Bugs and Glitches</option>
+                    <option value="Advanced Topics">Advanced Topics</option>
+                    <option value="Connecting to the Physical World">Connecting to the Physical World</option>
+                    <option value="Developing Scratch Extensions">Developing Scratch Extensions</option>
+                    <option value="Open Source Projects">Open Source Projects</option>
+                </optgroup>
+                <optgroup label="Interests Beyond Scratch">
+                    <option value="Things I'm Making and Creating">Things I'm Making and Creating</option>
+                    <option value="Things I'm Reading and Playing">Things I'm Reading and Playing</option>
+                </optgroup>
+                <optgroup label="Scratch Around the World">
+                    <option value="Africa">Africa</option>
+                    <option value="Bahasa Indonesia">Bahasa Indonesia</option>
+                    <option value="Català">Català</option>
+                    <option value="Deutsch">Deutsch</option>
+                    <option value="Ελληνικά">Ελληνικά</option>
+                    <option value="Español">Español</option>
+                    <option value="فارسی">فارسی</option>
+                    <option value="Français">Français</option>
+                    <option value="עברית">עברית</option>
+                    <option value="हिन्दी">हिन्दी</option>
+                    <option value="한국어">한국어</option>
+                    <option value="Italiano">Italiano</option>
+                    <option value="Nederlands">Nederlands</option>
+                    <option value="日本語">日本語</option>
+                    <option value="Norsk">Norsk</option>
+                    <option value="Polski">Polski</option>
+                    <option value="Português">Português</option>
+                    <option value="Pусский">Pусский</option>
+                    <option value="Türkçe">Türkçe</option>
+                    <option value="中文">中文</option>
+                    <option value="Other Languages">Other Languages</option>
+                    <option value="Translating Scratch">Translating Scratch</option>
+                </optgroup>
+            </select>
+        </div>
+        <div style="margin-top: 5px;" class="cf">
+            <a id="prev">&lt; Previous Page</a>
+            <input type="number" placeholder="Page #" id="gopage">
+            <a id="next">Next Page &gt;</a>
+        </div>
+
+        <h3>Loading...</h3>
+        <table id="topics" hidden>
+            <thead style="text-align: center;">
+                <tr>
+                    <td>Topic</td>
+                    <td>Replies</td>
+                    <td>Last Post</td>
+                </tr>
+            </thead>
+            <tbody id="topics-container"></tbody>
+        </table>
+
+        <script>
+            function changeCategory() {
+                let target = document.querySelector("#categorySwitcher").value;
+                location.search = `?category=${categories[target]}`;
+            }
+
+            function htmlToNode(html) {
+                const template = document.createElement('template');
+                template.innerHTML = html;
+                const nNodes = template.content.childNodes.length;
+                return template.content.firstChild;
+            }
+
+            (async function () {
+                let searchParams = new URLSearchParams(location.search);
+                window.page = searchParams.get("page") || 1;
+                window.category = parseInt(searchParams.get("category") || 0);
+
+                document.querySelector("#prev").href = "?page=" + (parseInt(page) - 1) + "&category=" + category;
+                document.querySelector("#next").href = "?page=" + (parseInt(page) + 1) + "&category=" + category;
+                document.querySelector("#gopage").value = page;
+                if (page == 1) document.querySelector("#prev").hidden = true;
+
+                const container = document.querySelector("#topics-container")
+                const topics = await (await fetch(`https://api.scratchpost.quuq.dev/browse/topics?limit=20&offset=${(page - 1) * 20}${category ? `&category=${category}` : ""}`)).json()
+                for (const topic of topics) {
+                    const baseItem = `<tr>
+                            <td class="topic" style="max-width: 650px;"><a class="topic-name"></a> by <a class="topic-author"></a></td>
+                            <td class="replies"></td>
+                            <td class="last-post"><span class="last-time"></span></td>
+                        </tr>`;
+                    const newEl = htmlToNode(baseItem.replaceAll(/\n[ ]+/g, ""));
+                    newEl.querySelector(".topic-name").href = `/topics/${topic.id}`
+                    newEl.querySelector(".topic-name").innerText = topic.name
+                    newEl.querySelector(".topic-author").href = `/users/${topic.author}`
+                    newEl.querySelector(".topic-author").innerText = topic.author
+                    newEl.querySelector(".replies").innerText = topic.post_count
+                    newEl.querySelector(".last-time").innerText = new Date(topic.last_post_date).toLocaleString()
+                    container.appendChild(newEl)
+                }
+                document.querySelector("#topics").hidden = false
+                document.querySelector("h3").remove()
+            })()
+        </script>
+        <script type="module">
+            // get category map from ocular because jeffalo already did the hard work
+            import categoryMap from "https://cdn.jsdelivr.net/gh/jeffalo/ocular@f321922b56d96f5aa4b135315cc252ba95b3e807/assets/category-map.js";
+            const f = obj => Object.fromEntries(Object.entries(obj).map(a => a.reverse()));
+            window.categories = f(Object.fromEntries(categoryMap));
+            window.categories["All"] = "0";
+            window.categories2 = Object.fromEntries(categoryMap);
+            window.categories2["0"] = "All";
+            const cat = new URLSearchParams(location.search).get("category") || "0";
+            document.querySelector("#categorySwitcher").value = categories2[cat];
+            document.querySelector("#title").innerText = `Browsing ${cat > 0 ? categories2[cat] : "the forums"}`;
+        </script>
+
+    </div>
+    <script src="/js/dark-mode.js"></script>
+</body>
+
+</html>

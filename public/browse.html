@@ -167,7 +167,7 @@
         </script>
         <script type="module">
             // get category map from ocular because jeffalo already did the hard work
-            import categoryMap from "https://cdn.jsdelivr.net/gh/jeffalo/ocular@f321922b56d96f5aa4b135315cc252ba95b3e807/assets/category-map.js";
+            import categoryMap from "https://cdn.jsdelivr.net/gh/redspacecat/ocular@9dff5bc9e7e80cc4b0a77026efacb661ea024862/assets/category-map.js";
             const f = obj => Object.fromEntries(Object.entries(obj).map(a => a.reverse()));
             window.categories = f(Object.fromEntries(categoryMap));
             window.categories["All"] = "0";

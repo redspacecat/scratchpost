@@ -1,4 +1,4 @@
-import categoryData from "https://cdn.jsdelivr.net/gh/jeffalo/ocular@latest/assets/category-map.js"; // thanks to jeffalo!
+import categoryData from "https://cdn.jsdelivr.net/gh/redspacecat/ocular@9dff5bc9e7e80cc4b0a77026efacb661ea024862/assets/category-map.js"; // thanks to jeffalo!
 const categories = Object.fromEntries(Object.entries(Object.fromEntries(categoryData)).map(([key, value]) => [value, key]));
 console.log(categories);
 window.invertedCategories = Object.fromEntries(categoryData)

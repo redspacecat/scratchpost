@@ -148,7 +148,7 @@
                 const topics = await (await fetch(`https://api.scratchpost.quuq.dev/browse/topics?limit=20&offset=${(page - 1) * 20}${category ? `&category=${category}` : ""}`)).json()
                 for (const topic of topics) {
                     const baseItem = `<tr>
-                            <td class="topic" style="max-width: 650px;"><a class="topic-name"></a> by <a class="topic-author"></a></td>
+                            <td class="topic" style="max-width: 650px;"><a class="topic-name"></a> by <a>@</a><a class="topic-author"></a></td>
                             <td class="replies"></td>
                             <td class="last-post"><span class="last-time"></span></td>
                         </tr>`;

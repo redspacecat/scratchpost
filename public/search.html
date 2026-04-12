@@ -10,6 +10,12 @@
 </head>
 
 <body>
+<style>
+    #search-query {
+        border-radius: 5px;
+        padding: 2px 5px;
+    }
+</style>
     <nav class="nav">
         <a href="/">ScratchPost</a>
         <a href="/search">Search</a>
@@ -28,7 +34,7 @@
         <hr>
         <h3>Search Posts</h3>
         <form action="/search/posts">
-            <label>Search Query: </label><input name="q" placeholder="Search query...">
+            <label>Search Query: </label><br><br><input id="search-query" name="q" placeholder="Search query...">
             <input type="submit" value="🔍 Search"><br>
             <br>
             <details>
@@ -54,7 +60,7 @@
         </form>
         <h3>Search Topics</h3>
         <form action="/search/topics">
-            <label>Search Query: </label><input name="q" placeholder="Search query...">
+            <label>Search Query: </label><br><br><input name="q" id="search-query" placeholder="Search query...">
             <input type="submit" value="🔍 Search"><br>
             <br>
             <details>

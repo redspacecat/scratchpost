@@ -90,6 +90,10 @@
         {
             "source": "/posts/:id",
             "destination": "/search/posts?post=:id"
+        },
+        {
+            "source": "/discuss/youtube/:id/",
+            "destination": "https://scratch.mit.edu/discuss/youtube/:id/"
         }
     ]
 }
